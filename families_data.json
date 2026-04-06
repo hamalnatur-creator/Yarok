@@ -1,0 +1,1625 @@
+[
+  {
+    "name": "אביאל",
+    "members": [
+      "צליל",
+      "יהודה"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "מייסדים",
+    "leader": "תהילה אביאל",
+    "assigned": true
+  },
+  {
+    "name": "אביאל",
+    "members": [
+      "יהל",
+      "תהילה"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "מייסדים",
+    "leader": "תהילה אביאל",
+    "assigned": true
+  },
+  {
+    "name": "אוליאל",
+    "members": [
+      "רוית",
+      "נמרוד"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "שכונה א2",
+    "leader": "קרן אלון גולן",
+    "assigned": true
+  },
+  {
+    "name": "אורנשטיין",
+    "members": [
+      "יפעת",
+      "אברהם"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "שכונה א2",
+    "leader": "קרן אלון גולן",
+    "assigned": true
+  },
+  {
+    "name": "אזבנד",
+    "members": [
+      "אלה",
+      "מיכאל"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "שכונה א1",
+    "leader": "רינה אפלבוים",
+    "assigned": true
+  },
+  {
+    "name": "אזולאי",
+    "members": [
+      "כרמית",
+      "אופיר"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "שכונה א1",
+    "leader": "רינה אפלבוים",
+    "assigned": true
+  },
+  {
+    "name": "איזמרלי",
+    "members": [
+      "גלית"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "מייסדים",
+    "leader": "תהילה אביאל",
+    "assigned": true
+  },
+  {
+    "name": "אייגנר",
+    "members": [
+      "נילי",
+      "יעקב"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "שלב ב",
+    "leader": "סער לנדוי",
+    "assigned": true
+  },
+  {
+    "name": "אלבה",
+    "members": [
+      "יעל",
+      "עמיחי"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "שלב ב",
+    "leader": "סער לנדוי",
+    "assigned": true
+  },
+  {
+    "name": "אלון",
+    "members": [
+      "אמיתי"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "ב1",
+    "leader": "אביה דהן",
+    "assigned": true
+  },
+  {
+    "name": "אלון",
+    "members": [
+      "ענת"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "ב1",
+    "leader": "אביה דהן",
+    "assigned": true
+  },
+  {
+    "name": "אלון-גולן",
+    "members": [
+      "קרן",
+      "אריאל"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "ב2",
+    "leader": "לורי מילר",
+    "assigned": true
+  },
+  {
+    "name": "אליצ'וב",
+    "members": [
+      "אלה",
+      "דימה"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "מייסדים",
+    "leader": "תהילה אביאל",
+    "assigned": true
+  },
+  {
+    "name": "אלמושנינו אודליה",
+    "members": [],
+    "type": "שוכר",
+    "neighborhood": "שלב ב",
+    "leader": "סער לנדוי",
+    "assigned": true
+  },
+  {
+    "name": "אפל",
+    "members": [
+      "שוקי",
+      "חנה"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "שכונה א1",
+    "leader": "רינה אפלבוים",
+    "assigned": true
+  },
+  {
+    "name": "אפלבאום",
+    "members": [
+      "רינה",
+      "גבי"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "שכונה א1",
+    "leader": "רינה אפלבוים",
+    "assigned": true
+  },
+  {
+    "name": "באבד",
+    "members": [
+      "שי",
+      "איילת"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "ב1",
+    "leader": "אביה דהן",
+    "assigned": true
+  },
+  {
+    "name": "בוצר",
+    "members": [
+      "דדי",
+      "זוהר"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "מייסדים",
+    "leader": "תומר חמו",
+    "assigned": true
+  },
+  {
+    "name": "בן דוד",
+    "members": [
+      "ינון"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "ב1",
+    "leader": "אביה דהן",
+    "assigned": true
+  },
+  {
+    "name": "בן דוד",
+    "members": [
+      "פז"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "ב1",
+    "leader": "אביה דהן",
+    "assigned": true
+  },
+  {
+    "name": "בן שמחון",
+    "members": [
+      "גיא",
+      "ורוניק"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "קרווילות",
+    "leader": "ענת זהר",
+    "assigned": true
+  },
+  {
+    "name": "ברוקר",
+    "members": [
+      "איתן",
+      "גל"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "שכונה ב2",
+    "leader": "לורי מילר",
+    "assigned": true
+  },
+  {
+    "name": "ברי",
+    "members": [
+      "נעמה",
+      "מאיר"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "אשקוביות",
+    "leader": "ורד לנס",
+    "assigned": true
+  },
+  {
+    "name": "ברקוביץ",
+    "members": [
+      "יעקב",
+      "דקלה"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "קרוואנים",
+    "leader": "יהודית הלר",
+    "assigned": true
+  },
+  {
+    "name": "בשן אפי",
+    "members": [],
+    "type": "שוכר",
+    "neighborhood": "שלב ב",
+    "leader": "סער לנדוי",
+    "assigned": true
+  },
+  {
+    "name": "ג'ארט",
+    "members": [
+      "נתנאל",
+      "רחלי"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "שכונה ב2",
+    "leader": "לורי מילר",
+    "assigned": true
+  },
+  {
+    "name": "גוטמן",
+    "members": [
+      "בנימין",
+      "מיטל"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "שכונה ב2",
+    "leader": "לורי מילר",
+    "assigned": true
+  },
+  {
+    "name": "גולן",
+    "members": [
+      "רחל",
+      "אליצור"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "שכונה א2",
+    "leader": "קרן אלון גולן",
+    "assigned": true
+  },
+  {
+    "name": "גורליק",
+    "members": [
+      "איילת",
+      "חיים"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "שכונה א2",
+    "leader": "קרן אלון גולן",
+    "assigned": true
+  },
+  {
+    "name": "גיל",
+    "members": [
+      "בארי",
+      "גבי"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "ב2",
+    "leader": "לורי מילר",
+    "assigned": true
+  },
+  {
+    "name": "גמלא",
+    "members": [
+      "לאה",
+      "ישי"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "שכונה א2",
+    "leader": "קרן אלון גולן",
+    "assigned": true
+  },
+  {
+    "name": "גמלא",
+    "members": [
+      "איילת",
+      "מאיר"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "שכונה א2",
+    "leader": "קרן אלון גולן",
+    "assigned": true
+  },
+  {
+    "name": "גסנבאור",
+    "members": [
+      "איתי",
+      "הדסי"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "ב1",
+    "leader": "אביה דהן",
+    "assigned": true
+  },
+  {
+    "name": "גרובר רייקין",
+    "members": [
+      "אליה",
+      "יניב"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "שכונה א2",
+    "leader": "קרן אלון גולן",
+    "assigned": true
+  },
+  {
+    "name": "דגן",
+    "members": [
+      "ירון"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "אשקוביות",
+    "leader": "ורד לנס",
+    "assigned": true
+  },
+  {
+    "name": "דגן",
+    "members": [
+      "יובל",
+      "שיר"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "אשקוביות",
+    "leader": "ורד לנס",
+    "assigned": true
+  },
+  {
+    "name": "דהן",
+    "members": [
+      "אביה",
+      "רשף"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "שלב ב",
+    "leader": "אביה דהן",
+    "assigned": true
+  },
+  {
+    "name": "דויטש",
+    "members": [
+      "ביקי",
+      "קובי"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "שכונה ב2",
+    "leader": "לורי מילר",
+    "assigned": true
+  },
+  {
+    "name": "דור",
+    "members": [
+      "שמר",
+      "שרה"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "מייסדים",
+    "leader": "תהילה אביאל",
+    "assigned": true
+  },
+  {
+    "name": "דרמון",
+    "members": [
+      "שמואל",
+      "אפרת"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "שכונה ב2",
+    "leader": "לורי מילר",
+    "assigned": true
+  },
+  {
+    "name": "הוך נועם וספיר טיטלבוים",
+    "members": [],
+    "type": "שוכר",
+    "neighborhood": "קרוואנים",
+    "leader": "יהודית הלר",
+    "assigned": true
+  },
+  {
+    "name": "הלר",
+    "members": [
+      "יהודית",
+      "יוני"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "קרוואנים",
+    "leader": "יהודית הלר",
+    "assigned": true
+  },
+  {
+    "name": "הראל",
+    "members": [
+      "נועה",
+      "חגי"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "שכונה א1",
+    "leader": "רינה אפלבוים",
+    "assigned": true
+  },
+  {
+    "name": "הרשקוביץ",
+    "members": [
+      "יוסי",
+      "מרים"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "מייסדים",
+    "leader": "תומר חמו",
+    "assigned": true
+  },
+  {
+    "name": "השכל",
+    "members": [
+      "נתנאל",
+      "תהילה"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "קרוואנים",
+    "leader": "יהודית הלר",
+    "assigned": true
+  },
+  {
+    "name": "השכל",
+    "members": [
+      "צבי",
+      "אביטל"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "קרוואנים",
+    "leader": "יהודית הלר",
+    "assigned": true
+  },
+  {
+    "name": "וגנר",
+    "members": [
+      "מאיה",
+      "יוסי"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "שכונה ב2",
+    "leader": "לורי מילר",
+    "assigned": true
+  },
+  {
+    "name": "ודר",
+    "members": [
+      "שרונה",
+      "עמי"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "מייסדים",
+    "leader": "תומר חמו",
+    "assigned": true
+  },
+  {
+    "name": "ודר",
+    "members": [
+      "עמית",
+      "רעות"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "מייסדים",
+    "leader": "תומר חמו",
+    "assigned": true
+  },
+  {
+    "name": "וייס",
+    "members": [
+      "נטע",
+      "יוסי"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "שכונה א2",
+    "leader": "קרן אלון גולן",
+    "assigned": true
+  },
+  {
+    "name": "וייס",
+    "members": [
+      "נעמי",
+      "שמחה"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "שכונה א2",
+    "leader": "קרן אלון גולן",
+    "assigned": true
+  },
+  {
+    "name": "זהר",
+    "members": [
+      "גל",
+      "ענת"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "קרווילות",
+    "leader": "ענת זהר",
+    "assigned": true
+  },
+  {
+    "name": "זיו",
+    "members": [
+      "חגי",
+      "גפן"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "ב2",
+    "leader": "לורי מילר",
+    "assigned": true
+  },
+  {
+    "name": "זילברמן",
+    "members": [
+      "יואל",
+      "טל"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "שלב ב",
+    "leader": "אביה דהן",
+    "assigned": true
+  },
+  {
+    "name": "זליכא",
+    "members": [
+      "חרות",
+      "חנניה"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "שלב ב",
+    "leader": "אביה דהן",
+    "assigned": true
+  },
+  {
+    "name": "חביב",
+    "members": [
+      "שיר",
+      "ניצן"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "שכונה ב2",
+    "leader": "לורי מילר",
+    "assigned": true
+  },
+  {
+    "name": "חלף",
+    "members": [
+      "אוריאן",
+      "נתנאל"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "קרוואנים",
+    "leader": "יהודית הלר",
+    "assigned": true
+  },
+  {
+    "name": "חמדי",
+    "members": [
+      "אלירז",
+      "דן"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "שלב ב",
+    "leader": "אביה דהן",
+    "assigned": true
+  },
+  {
+    "name": "טל",
+    "members": [
+      "עירית",
+      "חנוך"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "שלב א",
+    "leader": "קרן אלון גולן",
+    "assigned": true
+  },
+  {
+    "name": "טל",
+    "members": [
+      "ריקי",
+      "אלון"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "שלב ב",
+    "leader": "סער לנדוי",
+    "assigned": true
+  },
+  {
+    "name": "טמיר",
+    "members": [
+      "דניאלה",
+      "יצחק"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "מייסדים",
+    "leader": "תומר חמו",
+    "assigned": true
+  },
+  {
+    "name": "ימיני",
+    "members": [
+      "מיכל"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "שכונה א1",
+    "leader": "רינה אפלבוים",
+    "assigned": true
+  },
+  {
+    "name": "כהן קלס",
+    "members": [
+      "מיכל",
+      "דוד"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "שכונה א1",
+    "leader": "רינה אפלבוים",
+    "assigned": true
+  },
+  {
+    "name": "כוחי",
+    "members": [
+      "חגי"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "שלב ב",
+    "leader": "סער לנדוי",
+    "assigned": true
+  },
+  {
+    "name": "כרמל",
+    "members": [
+      "מורן",
+      "ליאור"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "שכונה א2",
+    "leader": "קרן אלון גולן",
+    "assigned": true
+  },
+  {
+    "name": "לאונוף",
+    "members": [
+      "מריאלה"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "מייסדים",
+    "leader": "תומר חמו",
+    "assigned": true
+  },
+  {
+    "name": "לאשקר",
+    "members": [
+      "שני",
+      "נתן"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "שכונה ב2",
+    "leader": "לורי מילר",
+    "assigned": true
+  },
+  {
+    "name": "לוי",
+    "members": [
+      "אלאור",
+      "מור"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "שלב ב",
+    "leader": "אביה דהן",
+    "assigned": true
+  },
+  {
+    "name": "לוריא",
+    "members": [
+      "אופיר",
+      "עליה"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "שלב ב",
+    "leader": "אביה דהן",
+    "assigned": true
+  },
+  {
+    "name": "ליברמן",
+    "members": [
+      "טלי"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "מייסדים",
+    "leader": "תומר חמו",
+    "assigned": true
+  },
+  {
+    "name": "ליברמן",
+    "members": [
+      "תמר",
+      "רמי"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "שלב ב",
+    "leader": "אביה דהן",
+    "assigned": true
+  },
+  {
+    "name": "לנדוי",
+    "members": [
+      "סער",
+      "עמיחי"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "שלב ב",
+    "leader": "סער לנדוי",
+    "assigned": true
+  },
+  {
+    "name": "לנס",
+    "members": [
+      "ורד",
+      "ברק"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "אשקוביות",
+    "leader": "ורד לנס",
+    "assigned": true
+  },
+  {
+    "name": "מדמוני",
+    "members": [
+      "אביחי",
+      "מירה"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "שלב ב",
+    "leader": "סער לנדוי",
+    "assigned": true
+  },
+  {
+    "name": "מוסנזון",
+    "members": [
+      "רחל",
+      "איתמר"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "שכונה ב2",
+    "leader": "לורי מילר",
+    "assigned": true
+  },
+  {
+    "name": "מוסקובסקי",
+    "members": [
+      "גיל"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "מייסדים",
+    "leader": "תומר חמו",
+    "assigned": true
+  },
+  {
+    "name": "מורנו",
+    "members": [
+      "אחיעם",
+      "דוד"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "שכונה ב2",
+    "leader": "לורי מילר",
+    "assigned": true
+  },
+  {
+    "name": "מילר",
+    "members": [
+      "איציק",
+      "לורי"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "שכונה ב2",
+    "leader": "לורי מילר",
+    "assigned": true
+  },
+  {
+    "name": "מליק",
+    "members": [
+      "נילי",
+      "אבינועם"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "שכונה א2",
+    "leader": "קרן אלון גולן",
+    "assigned": true
+  },
+  {
+    "name": "מלכיאור",
+    "members": [
+      "ליאת",
+      "יואב"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "שלב ב",
+    "leader": "סער לנדוי",
+    "assigned": true
+  },
+  {
+    "name": "מנדל",
+    "members": [
+      "מיקה",
+      "יששכר"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "שלב ב",
+    "leader": "סער לנדוי",
+    "assigned": true
+  },
+  {
+    "name": "מני",
+    "members": [
+      "אלמוג",
+      "אסף"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "שכונה א2",
+    "leader": "קרן אלון גולן",
+    "assigned": true
+  },
+  {
+    "name": "נווה",
+    "members": [
+      "שולמית",
+      "נחום"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "שכונה א2",
+    "leader": "קרן אלון גולן",
+    "assigned": true
+  },
+  {
+    "name": "נפתלי",
+    "members": [
+      "שחר",
+      "פאניה"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "שכונה א2",
+    "leader": "קרן אלון גולן",
+    "assigned": true
+  },
+  {
+    "name": "סופר",
+    "members": [
+      "אור",
+      "גיתה"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "שכונה ב2",
+    "leader": "לורי מילר",
+    "assigned": true
+  },
+  {
+    "name": "סמואל",
+    "members": [
+      "הלל"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "מייסדים",
+    "leader": "תומר חמו",
+    "assigned": true
+  },
+  {
+    "name": "ספיר",
+    "members": [
+      "אורי",
+      "דניאלה"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "קרווילות",
+    "leader": "ענת זהר",
+    "assigned": true
+  },
+  {
+    "name": "עוז",
+    "members": [
+      "דאנה"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "שלב ב",
+    "leader": "אביה דהן",
+    "assigned": true
+  },
+  {
+    "name": "פוקס",
+    "members": [
+      "כנרת",
+      "דורון"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "קרווילות",
+    "leader": "ענת זהר",
+    "assigned": true
+  },
+  {
+    "name": "פורת",
+    "members": [
+      "אלון"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "מייסדים",
+    "leader": "תומר חמו",
+    "assigned": true
+  },
+  {
+    "name": "פפרני",
+    "members": [
+      "יוליה",
+      "יבגני"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "מייסדים",
+    "leader": "תומר חמו",
+    "assigned": true
+  },
+  {
+    "name": "פרידמן",
+    "members": [
+      "זהר",
+      "עמר"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "אשקוביות",
+    "leader": "ורד לנס",
+    "assigned": true
+  },
+  {
+    "name": "פריימן",
+    "members": [
+      "ליאת",
+      "ירדן"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "שלב ב",
+    "leader": "אביה דהן",
+    "assigned": true
+  },
+  {
+    "name": "צבר",
+    "members": [
+      "מיכל",
+      "אלירן"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "מייסדים",
+    "leader": "תומר חמו",
+    "assigned": true
+  },
+  {
+    "name": "צבר",
+    "members": [
+      "סמדר",
+      "יואל"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "מייסדים",
+    "leader": "תומר חמו",
+    "assigned": true
+  },
+  {
+    "name": "צברי",
+    "members": [
+      "דידי",
+      "ברק"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "שלב ב",
+    "leader": "אביה דהן",
+    "assigned": true
+  },
+  {
+    "name": "צברי",
+    "members": [
+      "נח",
+      "ענבר"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "שלב ב",
+    "leader": "אביה דהן",
+    "assigned": true
+  },
+  {
+    "name": "צוברי",
+    "members": [
+      "הדר",
+      "אביב"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "שכונה ב2",
+    "leader": "לורי מילר",
+    "assigned": true
+  },
+  {
+    "name": "צור אן",
+    "members": [],
+    "type": "שוכר",
+    "neighborhood": "קרוואנים",
+    "leader": "יהודית הלר",
+    "assigned": true
+  },
+  {
+    "name": "קאופמן",
+    "members": [
+      "איילת",
+      "אייל"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "שכונה א1",
+    "leader": "רינה אפלבוים",
+    "assigned": true
+  },
+  {
+    "name": "קאופמן",
+    "members": [
+      "מאיר"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "שכונה א1",
+    "leader": "רינה אפלבוים",
+    "assigned": true
+  },
+  {
+    "name": "קבסה",
+    "members": [
+      "שאולי",
+      "זהבית"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "שלב ב",
+    "leader": "אביה דהן",
+    "assigned": true
+  },
+  {
+    "name": "קולט",
+    "members": [
+      "בת שבע"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "מייסדים",
+    "leader": "תומר חמו",
+    "assigned": true
+  },
+  {
+    "name": "קנטור פרחי",
+    "members": [
+      "מריאלה"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "קרווילות",
+    "leader": "ענת זהר",
+    "assigned": true
+  },
+  {
+    "name": "קרויזר",
+    "members": [
+      "עדי",
+      "איציק"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "שלב ב",
+    "leader": "סער לנדוי",
+    "assigned": true
+  },
+  {
+    "name": "קרמר",
+    "members": [
+      "אורלי",
+      "מנדי"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "מייסדים",
+    "leader": "תומר חמו",
+    "assigned": true
+  },
+  {
+    "name": "קרמר",
+    "members": [
+      "מעיין",
+      "תומר"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "מייסדים",
+    "leader": "תומר חמו",
+    "assigned": true
+  },
+  {
+    "name": "רבקין",
+    "members": [
+      "שמרית",
+      "ארז"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "שלב ב",
+    "leader": "אביה דהן",
+    "assigned": true
+  },
+  {
+    "name": "רוזנברג",
+    "members": [
+      "צבי",
+      "צופיה"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "שלב ב",
+    "leader": "אביה דהן",
+    "assigned": true
+  },
+  {
+    "name": "רוזנסון",
+    "members": [
+      "ענת",
+      "אלעד"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "שלב ב",
+    "leader": "סער לנדוי",
+    "assigned": true
+  },
+  {
+    "name": "רייש",
+    "members": [
+      "עדי",
+      "צביקה"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "שכונה א1",
+    "leader": "רינה אפלבוים",
+    "assigned": true
+  },
+  {
+    "name": "רשף",
+    "members": [
+      "אורלי",
+      "אוריה"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "שלב ב",
+    "leader": "סער לנדוי",
+    "assigned": true
+  },
+  {
+    "name": "רשף",
+    "members": [
+      "אורית",
+      "שוקי"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "אשקוביות",
+    "leader": "ורד לנס",
+    "assigned": true
+  },
+  {
+    "name": "שגיב",
+    "members": [
+      "מיכל",
+      "שימי"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "שכונה א1",
+    "leader": "רינה אפלבוים",
+    "assigned": true
+  },
+  {
+    "name": "שוויגר",
+    "members": [
+      "אורה",
+      "אליהו"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "שכונה א2",
+    "leader": "קרן אלון גולן",
+    "assigned": true
+  },
+  {
+    "name": "שטרנברג",
+    "members": [
+      "סימה",
+      "צחי"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "שכונה א2",
+    "leader": "קרן אלון גולן",
+    "assigned": true
+  },
+  {
+    "name": "שיר",
+    "members": [
+      "עפרה",
+      "נעם"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "קרוואנים",
+    "leader": "יהודית הלר",
+    "assigned": true
+  },
+  {
+    "name": "שכנר",
+    "members": [
+      "מיה",
+      "אמיר"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "שכונה א1",
+    "leader": "רינה אפלבוים",
+    "assigned": true
+  },
+  {
+    "name": "שלו חלפון",
+    "members": [
+      "און",
+      "יסכה"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "שכונה ב2",
+    "leader": "לורי מילר",
+    "assigned": true
+  },
+  {
+    "name": "שקד",
+    "members": [
+      "ליאת",
+      "ישראל"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "שלב ב",
+    "leader": "סער לנדוי",
+    "assigned": true
+  },
+  {
+    "name": "שקד שירה",
+    "members": [],
+    "type": "שוכר",
+    "neighborhood": "שכונה א1",
+    "leader": "רינה אפלבוים",
+    "assigned": true
+  },
+  {
+    "name": "אחינועם טמיר",
+    "members": [],
+    "type": "שוכר",
+    "neighborhood": "לא מוגדר",
+    "leader": "לא מוגדר",
+    "assigned": false
+  },
+  {
+    "name": "אינדיג",
+    "members": [
+      "ניצן"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "לא מוגדר",
+    "leader": "לא מוגדר",
+    "assigned": false
+  },
+  {
+    "name": "אינדיג",
+    "members": [
+      "נתנאל"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "לא מוגדר",
+    "leader": "לא מוגדר",
+    "assigned": false
+  },
+  {
+    "name": "אלומה איתן",
+    "members": [],
+    "type": "שוכר",
+    "neighborhood": "לא מוגדר",
+    "leader": "לא מוגדר",
+    "assigned": false
+  },
+  {
+    "name": "אפלבון סול",
+    "members": [],
+    "type": "שוכר",
+    "neighborhood": "לא מוגדר",
+    "leader": "לא מוגדר",
+    "assigned": false
+  },
+  {
+    "name": "ארליך",
+    "members": [
+      "אפרת",
+      "ידידיה"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "לא מוגדר",
+    "leader": "לא מוגדר",
+    "assigned": false
+  },
+  {
+    "name": "אשד אליה ושמואל",
+    "members": [],
+    "type": "שוכר",
+    "neighborhood": "לא מוגדר",
+    "leader": "לא מוגדר",
+    "assigned": false
+  },
+  {
+    "name": "בנצי גיל",
+    "members": [],
+    "type": "שוכר",
+    "neighborhood": "לא מוגדר",
+    "leader": "לא מוגדר",
+    "assigned": false
+  },
+  {
+    "name": "הילה כרמל+רותם (עובדות בחינוך)",
+    "members": [],
+    "type": "שוכר",
+    "neighborhood": "לא מוגדר",
+    "leader": "לא מוגדר",
+    "assigned": false
+  },
+  {
+    "name": "הררי אורה וסלע",
+    "members": [],
+    "type": "שוכר",
+    "neighborhood": "לא מוגדר",
+    "leader": "לא מוגדר",
+    "assigned": false
+  },
+  {
+    "name": "הרשקוביץ עדינה ואיתן",
+    "members": [],
+    "type": "שוכר",
+    "neighborhood": "לא מוגדר",
+    "leader": "לא מוגדר",
+    "assigned": false
+  },
+  {
+    "name": "חמו חנה ותומר",
+    "members": [],
+    "type": "שוכר",
+    "neighborhood": "לא מוגדר",
+    "leader": "לא מוגדר",
+    "assigned": false
+  },
+  {
+    "name": "חן",
+    "members": [
+      "יוחאי",
+      "מירב"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "לא מוגדר",
+    "leader": "לא מוגדר",
+    "assigned": false
+  },
+  {
+    "name": "חן כלפון",
+    "members": [],
+    "type": "שוכר",
+    "neighborhood": "לא מוגדר",
+    "leader": "לא מוגדר",
+    "assigned": false
+  },
+  {
+    "name": "טויזר יוספה",
+    "members": [],
+    "type": "שוכר",
+    "neighborhood": "לא מוגדר",
+    "leader": "לא מוגדר",
+    "assigned": false
+  },
+  {
+    "name": "כהן יעלה ותומר",
+    "members": [],
+    "type": "שוכר",
+    "neighborhood": "לא מוגדר",
+    "leader": "לא מוגדר",
+    "assigned": false
+  },
+  {
+    "name": "כרמי שמרית ויאיר",
+    "members": [],
+    "type": "שוכר",
+    "neighborhood": "לא מוגדר",
+    "leader": "לא מוגדר",
+    "assigned": false
+  },
+  {
+    "name": "ליה דהן ואיתן רפאל",
+    "members": [],
+    "type": "שוכר",
+    "neighborhood": "לא מוגדר",
+    "leader": "לא מוגדר",
+    "assigned": false
+  },
+  {
+    "name": "מזרחי טליה",
+    "members": [],
+    "type": "שוכר",
+    "neighborhood": "לא מוגדר",
+    "leader": "לא מוגדר",
+    "assigned": false
+  },
+  {
+    "name": "נחמיה שהם",
+    "members": [],
+    "type": "שוכר",
+    "neighborhood": "לא מוגדר",
+    "leader": "לא מוגדר",
+    "assigned": false
+  },
+  {
+    "name": "נס אסף",
+    "members": [],
+    "type": "שוכר",
+    "neighborhood": "לא מוגדר",
+    "leader": "לא מוגדר",
+    "assigned": false
+  },
+  {
+    "name": "נעה מזרחי",
+    "members": [],
+    "type": "שוכר",
+    "neighborhood": "לא מוגדר",
+    "leader": "לא מוגדר",
+    "assigned": false
+  },
+  {
+    "name": "עזר",
+    "members": [
+      "לילי"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "לא מוגדר",
+    "leader": "לא מוגדר",
+    "assigned": false
+  },
+  {
+    "name": "עטרת אברמוביץ",
+    "members": [],
+    "type": "שוכר",
+    "neighborhood": "לא מוגדר",
+    "leader": "לא מוגדר",
+    "assigned": false
+  },
+  {
+    "name": "עינת פישהיימר",
+    "members": [],
+    "type": "שוכר",
+    "neighborhood": "לא מוגדר",
+    "leader": "לא מוגדר",
+    "assigned": false
+  },
+  {
+    "name": "עמידור מיכל",
+    "members": [],
+    "type": "שוכר",
+    "neighborhood": "לא מוגדר",
+    "leader": "לא מוגדר",
+    "assigned": false
+  },
+  {
+    "name": "עמיצור",
+    "members": [
+      "רחלי",
+      "דרור"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "לא מוגדר",
+    "leader": "לא מוגדר",
+    "assigned": false
+  },
+  {
+    "name": "ערבה",
+    "members": [
+      "מיטל",
+      "אלעד"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "לא מוגדר",
+    "leader": "לא מוגדר",
+    "assigned": false
+  },
+  {
+    "name": "צברי יעל",
+    "members": [],
+    "type": "שוכר",
+    "neighborhood": "לא מוגדר",
+    "leader": "לא מוגדר",
+    "assigned": false
+  },
+  {
+    "name": "קדמן יאיר ורחלי",
+    "members": [],
+    "type": "שוכר",
+    "neighborhood": "לא מוגדר",
+    "leader": "לא מוגדר",
+    "assigned": false
+  },
+  {
+    "name": "קופפר טל",
+    "members": [],
+    "type": "שוכר",
+    "neighborhood": "לא מוגדר",
+    "leader": "לא מוגדר",
+    "assigned": false
+  },
+  {
+    "name": "קמה יוסי וצופיה",
+    "members": [],
+    "type": "שוכר",
+    "neighborhood": "לא מוגדר",
+    "leader": "לא מוגדר",
+    "assigned": false
+  },
+  {
+    "name": "קרמר שני",
+    "members": [],
+    "type": "שוכר",
+    "neighborhood": "לא מוגדר",
+    "leader": "לא מוגדר",
+    "assigned": false
+  },
+  {
+    "name": "רחל קורן+בניה משה",
+    "members": [],
+    "type": "שוכר",
+    "neighborhood": "לא מוגדר",
+    "leader": "לא מוגדר",
+    "assigned": false
+  },
+  {
+    "name": "רינגל הראל ודפנה",
+    "members": [],
+    "type": "שוכר",
+    "neighborhood": "לא מוגדר",
+    "leader": "לא מוגדר",
+    "assigned": false
+  },
+  {
+    "name": "רפאל",
+    "members": [
+      "יונתן"
+    ],
+    "type": "חברי אגודה",
+    "neighborhood": "לא מוגדר",
+    "leader": "לא מוגדר",
+    "assigned": false
+  },
+  {
+    "name": "שוויגר מאיר",
+    "members": [],
+    "type": "שוכר",
+    "neighborhood": "לא מוגדר",
+    "leader": "לא מוגדר",
+    "assigned": false
+  },
+  {
+    "name": "שטיין לבנה ויובל",
+    "members": [],
+    "type": "שוכר",
+    "neighborhood": "לא מוגדר",
+    "leader": "לא מוגדר",
+    "assigned": false
+  }
+]
