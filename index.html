@@ -52,40 +52,18 @@ h1 {
   color: #1f4e78;
 }
 
+h2 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: #1f4e78;
+  text-align: right;
+}
+
 .subtitle {
   font-size: 16px;
   color: #666;
   font-weight: 500;
-}
-
-.shelter-name {
-  font-size: 20px;
-  color: #4caf50;
-  font-weight: 600;
-  margin-top: 0.5rem;
-}
-
-.event-status {
-  background: #fff3cd;
-  border: 2px solid #ffc107;
-  padding: 1rem;
-  border-radius: 8px;
-  margin-bottom: 1.5rem;
-  text-align: center;
-  font-weight: 600;
-  color: #856404;
-}
-
-.event-status.active {
-  background: #d4edda;
-  border-color: #28a745;
-  color: #155724;
-}
-
-.event-status.closed {
-  background: #f8d7da;
-  border-color: #f5c6cb;
-  color: #721c24;
 }
 
 .grid {
@@ -121,6 +99,17 @@ h1 {
 .card-item-subtitle {
   font-size: 12px;
   color: #999;
+}
+
+.event-status {
+  background: #fff3cd;
+  border: 2px solid #ffc107;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  font-weight: 600;
+  color: #856404;
 }
 
 button {
@@ -164,29 +153,48 @@ button:hover {
 .btn-success {
   background: #4caf50;
   color: white;
-  flex: 1;
-  margin: 0 0.5rem 0.5rem 0;
+  padding: 8px 10px;
+  font-size: 13px;
+  margin: 0;
+}
+
+.btn-success:hover {
+  background: #45a049;
 }
 
 .btn-danger {
   background: #f44336;
   color: white;
-  flex: 1;
-  margin: 0 0.5rem 0.5rem 0;
+  padding: 8px 10px;
+  font-size: 13px;
+  margin: 0;
 }
 
-.btn-warning {
-  background: #ff9800;
-  color: white;
-  flex: 1;
-  margin: 0 0.5rem 0.5rem 0;
+.btn-danger:hover {
+  background: #da190b;
 }
 
 .btn-info {
   background: #2196f3;
   color: white;
-  flex: 1;
-  margin: 0 0.5rem 0.5rem 0;
+  padding: 8px 10px;
+  font-size: 13px;
+  margin: 0;
+}
+
+.btn-info:hover {
+  background: #1976d2;
+}
+
+.btn-warning {
+  background: #ff9800;
+  color: white;
+  padding: 8px 10px;
+  font-size: 13px;
+}
+
+.btn-warning:hover {
+  background: #e68900;
 }
 
 .card {
@@ -248,7 +256,6 @@ label {
   justify-content: space-between;
   align-items: center;
   transition: all 0.2s;
-  cursor: pointer;
 }
 
 .family-item:hover {
@@ -287,7 +294,13 @@ label {
   font-size: 12px;
   color: #4caf50;
   font-weight: 700;
-  margin-left: 1rem;
+}
+
+.family-buttons {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: flex-start;
 }
 
 .members-list {
@@ -317,6 +330,13 @@ label {
   cursor: pointer;
   font-size: 13px;
   font-weight: 400;
+}
+
+.member-item select {
+  width: auto;
+  margin: 0;
+  padding: 6px 8px;
+  font-size: 12px;
 }
 
 .response-buttons {
@@ -356,55 +376,6 @@ label {
   margin-bottom: 1rem;
 }
 
-.tabs {
-  display: flex;
-  gap: 0.5rem;
-  margin-bottom: 1.5rem;
-  border-bottom: 2px solid #eee;
-}
-
-.tab-btn {
-  padding: 12px 16px;
-  border: none;
-  background: transparent;
-  cursor: pointer;
-  font-size: 14px;
-  font-weight: 600;
-  color: #999;
-  border-bottom: 3px solid transparent;
-  width: auto;
-  margin: 0;
-}
-
-.tab-btn.active {
-  color: #1f4e78;
-  border-bottom-color: #1f4e78;
-}
-
-.tab-content {
-  display: none;
-}
-
-.tab-content.active {
-  display: block;
-}
-
-.urgent-indicator {
-  background: #f44336;
-  color: white;
-  padding: 0.5rem 0.75rem;
-  border-radius: 4px;
-  font-size: 11px;
-  font-weight: 700;
-  margin-left: 0.5rem;
-}
-
-.loading {
-  text-align: center;
-  padding: 2rem;
-  color: #999;
-}
-
 @media (max-width: 600px) {
   h1 {
     font-size: 24px;
@@ -414,17 +385,8 @@ label {
     grid-template-columns: 1fr;
   }
   
-  .response-buttons {
+  .family-buttons {
     flex-direction: column;
-  }
-  
-  .btn-success,
-  .btn-danger,
-  .btn-warning,
-  .btn-info {
-    flex: none;
-    width: 100%;
-    margin: 0.5rem 0 0 0;
   }
 }
 </style>
@@ -440,15 +402,95 @@ label {
     </header>
 
     <div id="eventStatusHome" class="event-status" style="display: none;">
-      <div id="eventStatusText"></div>
+      ⏸️ ארוע חירום פתוח כרגע
     </div>
 
+    <h2>🏘️ דיווח משכונות</h2>
+    <div id="neighborhoodsGrid" class="grid" style="margin-bottom: 2rem;"></div>
+
+    <h2>אפשרויות נוספות</h2>
     <button class="btn-primary" onclick="openSheltersHome()">📍 דיווח ממקלט / מיגוניות</button>
     <button class="btn-primary" onclick="openAdminLogin()">🔐 כניסה מנהל</button>
-    <button class="btn-primary" onclick="openLeaderLogin()">👥 כניסה ראש שכונה</button>
   </div>
 
-  <!-- Shelters Selection -->
+  <!-- Neighborhoods Selector Screen -->
+  <div id="neighborhoodsSelectScreen" class="screen">
+    <header>
+      <h1>🏘️ בחר שכונה</h1>
+      <p class="subtitle">לדיווח משפחות</p>
+    </header>
+
+    <button class="back-btn" onclick="goHome()">← חזור</button>
+
+    <div id="neighborhoodsSelectGrid" class="grid"></div>
+  </div>
+
+  <!-- Neighborhood Emergency Report Screen -->
+  <div id="neighborhoodEmergencyScreen" class="screen">
+    <header>
+      <h1 id="neighborhoodTitle">🏘️ דיווח משכונה</h1>
+    </header>
+
+    <button class="back-btn" onclick="goHome()">← חזור</button>
+
+    <div id="eventStatusNeighborhood" class="event-status" style="display: none;">
+      ⏸️ ארוע חירום פתוח
+    </div>
+
+    <div id="eventClosedWarningNeighborhood" class="warning-message" style="display: none;">
+      ⚠️ אין ארוע חירום פתוח כרגע
+    </div>
+
+    <div id="familiesNeighborhoodContainer"></div>
+  </div>
+
+  <!-- Detail Report Neighborhood -->
+  <div id="detailReportNeighborhoodScreen" class="screen">
+    <header>
+      <h1 id="detailFamilyNameNeighborhood">👤 פרטי משפחה</h1>
+    </header>
+
+    <button class="back-btn" onclick="backToNeighborhoodEmergency()">← חזור</button>
+
+    <div class="card">
+      <h3 style="margin-bottom: 1rem;">בחר סטטוס לכל חבר משפחה:</h3>
+      <div id="detailMembersNeighborhoodContainer" class="members-list"></div>
+
+      <div class="response-buttons" style="margin-top: 1.5rem;">
+        <button class="btn-success" onclick="submitDetailReportNeighborhood()" style="flex: 1; padding: 12px;">✓ שלח דיווח</button>
+        <button class="back-btn" onclick="backToNeighborhoodEmergency()" style="flex: 1; padding: 12px;">ביטול</button>
+      </div>
+    </div>
+
+    <div id="detailSuccessNeighborhood" class="success-message" style="display: none;">
+      ✓ דיווח בוצע בהצלחה!
+    </div>
+  </div>
+
+  <!-- Edit Report Screen -->
+  <div id="editReportScreen" class="screen">
+    <header>
+      <h1 id="editFamilyName">✏️ עריכת דיווח</h1>
+    </header>
+
+    <button class="back-btn" onclick="cancelEditReport()">← חזור</button>
+
+    <div class="card">
+      <h3 style="margin-bottom: 1rem;">בחר סטטוס חדש לכל חבר:</h3>
+      <div id="editMembersContainer" class="members-list"></div>
+
+      <div class="response-buttons" style="margin-top: 1.5rem;">
+        <button class="btn-info" onclick="submitEditReport()" style="flex: 1; padding: 12px;">✓ עדכן דיווח</button>
+        <button class="btn-danger" onclick="cancelEditReport()" style="flex: 1; padding: 12px;">ביטול</button>
+      </div>
+    </div>
+
+    <div id="editSuccess" class="success-message" style="display: none;">
+      ✓ הדיווח עודכן בהצלחה!
+    </div>
+  </div>
+
+  <!-- Shelters Home Screen -->
   <div id="sheltersHomeScreen" class="screen">
     <header>
       <h1>📍 בחר מקלט או מיגוניות</h1>
@@ -464,7 +506,6 @@ label {
   <div id="shelterReportScreen" class="screen">
     <header>
       <h1 id="shelterTitle">📍 דיווח</h1>
-      <p class="shelter-name" id="shelterNameDisplay"></p>
     </header>
 
     <button class="back-btn" onclick="goHome()">← חזור</button>
@@ -473,32 +514,32 @@ label {
       ⏸️ ארוע חירום פתוח
     </div>
 
-    <div id="eventClosedWarning" class="warning-message" style="display: none;">
+    <div id="eventClosedWarningShelter" class="warning-message" style="display: none;">
       ⚠️ אין ארוע חירום פתוח כרגע
     </div>
 
-    <div id="familiesContainer"></div>
+    <div id="familiesShelterContainer"></div>
   </div>
 
-  <!-- Detail Report Screen (Shelter) -->
+  <!-- Detail Report Shelter -->
   <div id="detailReportShelterScreen" class="screen">
     <header>
-      <h1 id="detailFamilyName">פרטי משפחה</h1>
+      <h1 id="detailFamilyNameShelter">👤 פרטי משפחה</h1>
     </header>
 
     <button class="back-btn" onclick="backToShelterReport()">← חזור</button>
 
     <div class="card">
       <h3 style="margin-bottom: 1rem;">בחר סטטוס לכל חבר משפחה:</h3>
-      <div id="detailMembersContainer" class="members-list"></div>
+      <div id="detailMembersShelterContainer" class="members-list"></div>
 
       <div class="response-buttons" style="margin-top: 1.5rem;">
-        <button class="btn-success" onclick="submitDetailReportShelter()">✓ שלח דיווח</button>
-        <button class="back-btn" onclick="backToShelterReport()">ביטול</button>
+        <button class="btn-success" onclick="submitDetailReportShelter()" style="flex: 1; padding: 12px;">✓ שלח דיווח</button>
+        <button class="back-btn" onclick="backToShelterReport()" style="flex: 1; padding: 12px;">ביטול</button>
       </div>
     </div>
 
-    <div id="detailSuccess" class="success-message" style="display: none;">
+    <div id="detailSuccessShelter" class="success-message" style="display: none;">
       ✓ דיווח בוצע בהצלחה!
     </div>
   </div>
@@ -532,75 +573,9 @@ label {
     <div id="eventStatusAdmin" class="event-status" style="display: none;"></div>
 
     <div class="card">
-      <h2 style="margin-bottom: 1rem;">ניהול ארוע</h2>
+      <h2 style="margin-bottom: 0;">ניהול ארוע</h2>
       <button class="btn-primary" onclick="startEmergencyEvent()">🚨 פתח ארוע חירום</button>
-      <button class="btn-danger" id="closeEventBtn" onclick="closeEmergencyEvent()" style="display: none;">סגור ארוע חירום</button>
-    </div>
-  </div>
-
-  <!-- Leader Login -->
-  <div id="leaderLoginScreen" class="screen">
-    <header>
-      <h1>👥 כניסה ראש שכונה</h1>
-    </header>
-
-    <button class="back-btn" onclick="goHome()">← חזור</button>
-
-    <div class="card">
-      <div class="form-group">
-        <label>בחר שכונה:</label>
-        <select id="neighborhoodSelect">
-          <option value="">-- בחר שכונה --</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label>סיסמא:</label>
-        <input type="password" id="leaderPassword" placeholder="הקלד סיסמא" onkeypress="if(event.key==='Enter') loginLeader()">
-      </div>
-      <button class="btn-primary" onclick="loginLeader()">כניסה</button>
-      <div id="leaderError" class="error-message" style="display: none;">❌ סיסמא שגויה</div>
-    </div>
-  </div>
-
-  <!-- Leader Dashboard -->
-  <div id="leaderDashboardScreen" class="screen">
-    <header>
-      <h1 id="leaderHeader">👥 דיווח משפחות</h1>
-    </header>
-
-    <button class="back-btn" onclick="logout()">🚪 התנתקות</button>
-
-    <div id="eventStatusLeader" class="event-status" style="display: none;">
-      ⏸️ ארוע חירום פתוח
-    </div>
-
-    <div id="eventClosedWarningLeader" class="warning-message" style="display: none;">
-      ⚠️ אין ארוע חירום פתוח כרגע
-    </div>
-
-    <div id="familiesLeaderContainer"></div>
-  </div>
-
-  <!-- Detail Report Screen (Leader) -->
-  <div id="detailReportLeaderScreen" class="screen">
-    <header>
-      <h1 id="detailFamilyNameLeader">פרטי משפחה</h1>
-    </header>
-
-    <button class="back-btn" onclick="backToLeaderDashboard()">← חזור</button>
-
-    <div class="card">
-      <h3 style="margin-bottom: 1rem;">בחר סטטוס לכל חבר משפחה:</h3>
-      <div id="detailMembersLeaderContainer" class="members-list"></div>
-
-      <div class="response-buttons" style="margin-top: 1.5rem;">
-        <button class="btn-success" onclick="submitDetailReportLeader()">✓ שלח דיווח</button>
-        <button class="back-btn" onclick="backToLeaderDashboard()">ביטול</button>
-      </div>
-    </div>
-
-    <div id="detailSuccessLeader" class="success-message" style="display: none;">
-      ✓ דיווח בוצע בהצלחה!
+      <button class="btn-danger" id="closeEventBtn" onclick="closeEmergencyEvent()" style="display: none; width: 100%; margin-bottom: 0;">סגור ארוע חירום</button>
     </div>
   </div>
 
@@ -608,17 +583,18 @@ label {
 
 <script>
 const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw7Wcg9Cy4t251wQLaDh06U88XVa6KYbORIxL-CImBxVzJJaVJmmd9WcMaFnZZ5ng2etw/exec";
-const LEADER_PASSWORD = "1234";
 
 let state = {
   currentUser: null,
-  currentNeighborhood: null,
   currentEvent: null,
   currentShelter: null,
+  currentNeighborhood: null,
   currentFamily: null,
+  editingReport: null,
   families: [],
   neighborhoods: [],
-  shelters: []
+  shelters: [],
+  reports: {}
 };
 
 async function init() {
@@ -627,7 +603,7 @@ async function init() {
   await loadSheltersFromSheets();
   await loadCurrentEvent();
   
-  populateNeighborhoodSelect();
+  renderNeighborhoodsHome();
   checkShelterParameter();
   updateEventStatus();
 }
@@ -680,14 +656,301 @@ async function loadCurrentEvent() {
   }
 }
 
-function populateNeighborhoodSelect() {
-  const select = document.getElementById('neighborhoodSelect');
+function renderNeighborhoodsHome() {
+  const grid = document.getElementById('neighborhoodsGrid');
+  grid.innerHTML = '';
+  
   state.neighborhoods.forEach(hood => {
-    const option = document.createElement('option');
-    option.value = hood.name;
-    option.textContent = hood.name + " - " + hood.leader;
-    select.appendChild(option);
+    const item = document.createElement('div');
+    item.className = 'card-item';
+    item.onclick = () => openNeighborhoodsSelect();
+    item.innerHTML = `
+      <div class="card-item-title">${hood.name}</div>
+      <div class="card-item-subtitle">👤 ${hood.leader}</div>
+    `;
+    grid.appendChild(item);
   });
+}
+
+function openNeighborhoodsSelect() {
+  renderNeighborhoodsSelectGrid();
+  showScreen('neighborhoodsSelectScreen');
+}
+
+function renderNeighborhoodsSelectGrid() {
+  const grid = document.getElementById('neighborhoodsSelectGrid');
+  grid.innerHTML = '';
+  
+  state.neighborhoods.forEach(hood => {
+    const item = document.createElement('div');
+    item.className = 'card-item';
+    item.onclick = () => openNeighborhoodEmergency(hood);
+    item.innerHTML = `
+      <div class="card-item-title">${hood.name}</div>
+      <div class="card-item-subtitle">👤 ${hood.leader}</div>
+    `;
+    grid.appendChild(item);
+  });
+}
+
+function openNeighborhoodEmergency(neighborhood) {
+  state.currentNeighborhood = neighborhood;
+  document.getElementById('neighborhoodTitle').textContent = '🏘️ ' + neighborhood.name;
+  
+  if (state.currentEvent && state.currentEvent.status === "פתוח") {
+    renderNeighborhoodFamilies();
+  }
+  
+  updateEventStatus();
+  showScreen('neighborhoodEmergencyScreen');
+}
+
+function renderNeighborhoodFamilies() {
+  const families = state.families.filter(f => f.neighborhood === state.currentNeighborhood.name);
+  const container = document.getElementById('familiesNeighborhoodContainer');
+  
+  let html = '<div style="display: flex; flex-direction: column-reverse;">';
+  
+  families.forEach(family => {
+    const isReported = state.reports[family.name];
+    const reportedClass = isReported ? 'reported' : '';
+    
+    html += `
+      <div class="family-item ${reportedClass}">
+        <div class="family-info">
+          <div class="family-name">${family.name}</div>
+          <div class="family-members">${family.members.slice(0, 3).join(", ")}</div>
+        </div>
+        <div class="family-buttons">
+          <button class="btn-success" onclick="quickReportNeighborhood(event, '${family.name}', 'הכל בסדר')">✓</button>
+          <button class="btn-info" onclick="openDetailReportNeighborhood('${family.name}')">📋</button>
+          <button class="btn-danger" onclick="quickReportNeighborhood(event, '${family.name}', 'צריכים עזרה')">🆘</button>
+          ${isReported ? `<button class="btn-warning" onclick="openEditReport('${family.name}')">✏️</button>` : ''}
+        </div>
+      </div>
+    `;
+  });
+  
+  html += '</div>';
+  container.innerHTML = html;
+}
+
+function openDetailReportNeighborhood(familyName) {
+  state.currentFamily = state.families.find(f => f.name === familyName);
+  if (!state.currentFamily) return;
+  
+  document.getElementById('detailFamilyNameNeighborhood').textContent = '👤 ' + familyName;
+  
+  let html = '';
+  state.currentFamily.members.forEach((member, index) => {
+    html += `
+      <div class="member-item">
+        <label>${member}</label>
+        <select id="status_neighborhood_${index}">
+          <option value="">-- בחר סטטוס --</option>
+          <option value="תקין">✓ תקין</option>
+          <option value="נעדר">✗ נעדר</option>
+          <option value="חירום רפואי">🚑 חירום רפואי</option>
+        </select>
+      </div>
+    `;
+  });
+  
+  document.getElementById('detailMembersNeighborhoodContainer').innerHTML = html;
+  document.getElementById('detailSuccessNeighborhood').style.display = 'none';
+  showScreen('detailReportNeighborhoodScreen');
+}
+
+async function submitDetailReportNeighborhood() {
+  const members = [];
+  state.currentFamily.members.forEach((member, index) => {
+    const status = document.getElementById('status_neighborhood_' + index).value;
+    if (status) {
+      members.push({ name: member, status: status });
+    }
+  });
+  
+  if (members.length === 0) {
+    alert('בחר סטטוס לפחות לחבר אחד');
+    return;
+  }
+  
+  try {
+    const response = await fetch(APPS_SCRIPT_URL, {
+      method: 'POST',
+      body: JSON.stringify({
+        action: 'addReport',
+        eventId: state.currentEvent.id,
+        family: state.currentFamily.name,
+        reportType: 'פירוט',
+        location: state.currentNeighborhood.name,
+        locationType: 'שכונה',
+        members: members
+      })
+    });
+    
+    const result = await response.json();
+    if (result.success) {
+      state.reports[state.currentFamily.name] = { type: 'פירוט', members: members };
+      document.getElementById('detailSuccessNeighborhood').style.display = 'block';
+      setTimeout(() => {
+        backToNeighborhoodEmergency();
+      }, 1500);
+    }
+  } catch (error) {
+    alert('❌ שגיאה: ' + error);
+  }
+}
+
+async function quickReportNeighborhood(event, familyName, reportType) {
+  event.stopPropagation();
+  
+  if (!state.currentEvent) {
+    alert('אין ארוע חירום פתוח');
+    return;
+  }
+  
+  try {
+    const response = await fetch(APPS_SCRIPT_URL, {
+      method: 'POST',
+      body: JSON.stringify({
+        action: 'addReport',
+        eventId: state.currentEvent.id,
+        family: familyName,
+        reportType: reportType,
+        location: state.currentNeighborhood.name,
+        locationType: 'שכונה'
+      })
+    });
+    
+    const result = await response.json();
+    if (result.success) {
+      state.reports[familyName] = { type: reportType };
+      renderNeighborhoodFamilies();
+    }
+  } catch (error) {
+    alert('❌ שגיאה: ' + error);
+  }
+}
+
+function openEditReport(familyName) {
+  state.currentFamily = state.families.find(f => f.name === familyName);
+  state.editingReport = familyName;
+  
+  document.getElementById('editFamilyName').textContent = '✏️ עריכת דיווח - ' + familyName;
+  
+  let html = '';
+  state.currentFamily.members.forEach((member, index) => {
+    html += `
+      <div class="member-item">
+        <label>${member}</label>
+        <select id="edit_status_${index}">
+          <option value="">-- בחר סטטוס --</option>
+          <option value="תקין">✓ תקין</option>
+          <option value="נעדר">✗ נעדר</option>
+          <option value="חירום רפואי">🚑 חירום רפואי</option>
+        </select>
+      </div>
+    `;
+  });
+  
+  document.getElementById('editMembersContainer').innerHTML = html;
+  document.getElementById('editSuccess').style.display = 'none';
+  showScreen('editReportScreen');
+}
+
+async function submitEditReport() {
+  const members = [];
+  state.currentFamily.members.forEach((member, index) => {
+    const status = document.getElementById('edit_status_' + index).value;
+    if (status) {
+      members.push({ name: member, status: status });
+    }
+  });
+  
+  if (members.length === 0) {
+    alert('בחר סטטוס לפחות לחבר אחד');
+    return;
+  }
+  
+  try {
+    const response = await fetch(APPS_SCRIPT_URL, {
+      method: 'POST',
+      body: JSON.stringify({
+        action: 'addReport',
+        eventId: state.currentEvent.id,
+        family: state.editingReport,
+        reportType: 'פירוט',
+        location: state.currentNeighborhood.name,
+        locationType: 'שכונה',
+        members: members
+      })
+    });
+    
+    const result = await response.json();
+    if (result.success) {
+      state.reports[state.editingReport] = { type: 'פירוט', members: members };
+      document.getElementById('editSuccess').style.display = 'block';
+      setTimeout(() => {
+        backToNeighborhoodEmergency();
+      }, 1500);
+    }
+  } catch (error) {
+    alert('❌ שגיאה: ' + error);
+  }
+}
+
+function cancelEditReport() {
+  state.editingReport = null;
+  backToNeighborhoodEmergency();
+}
+
+function backToNeighborhoodEmergency() {
+  state.currentFamily = null;
+  state.editingReport = null;
+  renderNeighborhoodFamilies();
+  showScreen('neighborhoodEmergencyScreen');
+}
+
+function showScreen(screenId) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(screenId).classList.add('active');
+}
+
+function goHome() {
+  state.currentUser = null;
+  state.currentShelter = null;
+  state.currentFamily = null;
+  state.currentNeighborhood = null;
+  updateEventStatus();
+  showScreen('homeScreen');
+}
+
+function logout() {
+  goHome();
+}
+
+function updateEventStatus() {
+  const isEventOpen = state.currentEvent && state.currentEvent.status === "פתוח";
+  
+  document.getElementById('eventStatusHome').style.display = isEventOpen ? 'block' : 'none';
+  
+  if (document.getElementById('eventStatusAdmin')) {
+    if (isEventOpen) {
+      document.getElementById('eventStatusAdmin').style.display = 'block';
+      document.getElementById('eventStatusAdmin').innerHTML = '🚨 ארוע חירום פתוח | פתוח ב: ' + state.currentEvent.timeOpen;
+      document.getElementById('closeEventBtn').style.display = 'block';
+    } else {
+      document.getElementById('eventStatusAdmin').style.display = 'none';
+      document.getElementById('closeEventBtn').style.display = 'none';
+    }
+  }
+  
+  document.getElementById('eventStatusNeighborhood').style.display = isEventOpen ? 'block' : 'none';
+  document.getElementById('eventClosedWarningNeighborhood').style.display = isEventOpen ? 'none' : 'block';
+  
+  document.getElementById('eventStatusShelter').style.display = isEventOpen ? 'block' : 'none';
+  document.getElementById('eventClosedWarningShelter').style.display = isEventOpen ? 'none' : 'block';
 }
 
 function checkShelterParameter() {
@@ -703,78 +966,7 @@ function checkShelterParameter() {
   }
 }
 
-function showScreen(screenId) {
-  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-  document.getElementById(screenId).classList.add('active');
-}
-
-function goHome() {
-  state.currentUser = null;
-  state.currentShelter = null;
-  state.currentFamily = null;
-  updateEventStatus();
-  showScreen('homeScreen');
-}
-
-function logout() {
-  goHome();
-}
-
-function updateEventStatus() {
-  const isEventOpen = state.currentEvent && state.currentEvent.status === "פתוח";
-  
-  const homeStatus = document.getElementById('eventStatusHome');
-  if (homeStatus) {
-    if (isEventOpen) {
-      homeStatus.style.display = 'block';
-      homeStatus.innerHTML = '🚨 ארוע חירום פתוח כרגע';
-    } else {
-      homeStatus.style.display = 'none';
-    }
-  }
-  
-  const adminStatus = document.getElementById('eventStatusAdmin');
-  if (adminStatus) {
-    if (isEventOpen) {
-      adminStatus.style.display = 'block';
-      adminStatus.innerHTML = '🚨 ארוע חירום פתוח | פתוח ב: ' + state.currentEvent.timeOpen;
-      document.getElementById('closeEventBtn').style.display = 'block';
-    } else {
-      adminStatus.style.display = 'none';
-      document.getElementById('closeEventBtn').style.display = 'none';
-    }
-  }
-  
-  const shelterStatus = document.getElementById('eventStatusShelter');
-  if (shelterStatus) {
-    if (isEventOpen) {
-      shelterStatus.style.display = 'block';
-    } else {
-      shelterStatus.style.display = 'none';
-    }
-  }
-  
-  const closedWarning = document.getElementById('eventClosedWarning');
-  if (closedWarning) {
-    closedWarning.style.display = isEventOpen ? 'none' : 'block';
-  }
-  
-  const leaderStatus = document.getElementById('eventStatusLeader');
-  if (leaderStatus) {
-    if (isEventOpen) {
-      leaderStatus.style.display = 'block';
-    } else {
-      leaderStatus.style.display = 'none';
-    }
-  }
-  
-  const closedWarningLeader = document.getElementById('eventClosedWarningLeader');
-  if (closedWarningLeader) {
-    closedWarningLeader.style.display = isEventOpen ? 'none' : 'block';
-  }
-}
-
-// ===== SHELTERS HOME =====
+// ===== SHELTERS =====
 function openSheltersHome() {
   renderSheltersHome();
   showScreen('sheltersHomeScreen');
@@ -799,7 +991,6 @@ function renderSheltersHome() {
 function openShelterReport(shelter) {
   state.currentShelter = shelter;
   document.getElementById('shelterTitle').textContent = '📍 דיווח מ' + shelter.name;
-  document.getElementById('shelterNameDisplay').textContent = shelter.name;
   
   if (state.currentEvent && state.currentEvent.status === "פתוח") {
     renderShelterFamilies();
@@ -810,21 +1001,26 @@ function openShelterReport(shelter) {
 }
 
 function renderShelterFamilies() {
-  const container = document.getElementById('familiesContainer');
+  const container = document.getElementById('familiesShelterContainer');
   container.innerHTML = '';
   
   let html = '<div style="display: flex; flex-direction: column-reverse;">';
   
   state.families.forEach(family => {
+    const isReported = state.reports[family.name];
+    const reportedClass = isReported ? 'reported' : '';
+    
     html += `
-      <div class="family-item" onclick="openDetailReportShelter('${family.name}')">
+      <div class="family-item ${reportedClass}">
         <div class="family-info">
           <div class="family-name">${family.name}</div>
           <div class="family-members">${family.members.slice(0, 3).join(", ")}</div>
         </div>
-        <div style="display: flex; gap: 0.5rem;">
-          <button class="btn-success" onclick="quickReportShelter(event, '${family.name}', 'הכל בסדר')" style="flex: none; margin: 0;">✓</button>
-          <button class="btn-danger" onclick="quickReportShelter(event, '${family.name}', 'צריכים עזרה')" style="flex: none; margin: 0;">🆘</button>
+        <div class="family-buttons">
+          <button class="btn-success" onclick="quickReportShelter(event, '${family.name}', 'הכל בסדר')">✓</button>
+          <button class="btn-info" onclick="openDetailReportShelter('${family.name}')">📋</button>
+          <button class="btn-danger" onclick="quickReportShelter(event, '${family.name}', 'צריכים עזרה')">🆘</button>
+          ${isReported ? `<button class="btn-warning" onclick="openEditReport('${family.name}')">✏️</button>` : ''}
         </div>
       </div>
     `;
@@ -838,14 +1034,14 @@ function openDetailReportShelter(familyName) {
   state.currentFamily = state.families.find(f => f.name === familyName);
   if (!state.currentFamily) return;
   
-  document.getElementById('detailFamilyName').textContent = '👤 ' + familyName;
+  document.getElementById('detailFamilyNameShelter').textContent = '👤 ' + familyName;
   
   let html = '';
   state.currentFamily.members.forEach((member, index) => {
     html += `
       <div class="member-item">
         <label>${member}</label>
-        <select id="status_shelter_${index}" style="width: auto; margin: 0;">
+        <select id="status_shelter_${index}">
           <option value="">-- בחר סטטוס --</option>
           <option value="תקין">✓ תקין</option>
           <option value="נעדר">✗ נעדר</option>
@@ -855,8 +1051,8 @@ function openDetailReportShelter(familyName) {
     `;
   });
   
-  document.getElementById('detailMembersContainer').innerHTML = html;
-  document.getElementById('detailSuccess').style.display = 'none';
+  document.getElementById('detailMembersShelterContainer').innerHTML = html;
+  document.getElementById('detailSuccessShelter').style.display = 'none';
   showScreen('detailReportShelterScreen');
 }
 
@@ -890,7 +1086,8 @@ async function submitDetailReportShelter() {
     
     const result = await response.json();
     if (result.success) {
-      document.getElementById('detailSuccess').style.display = 'block';
+      state.reports[state.currentFamily.name] = { type: 'פירוט', members: members };
+      document.getElementById('detailSuccessShelter').style.display = 'block';
       setTimeout(() => {
         backToShelterReport();
       }, 1500);
@@ -923,6 +1120,7 @@ async function quickReportShelter(event, familyName, reportType) {
     
     const result = await response.json();
     if (result.success) {
+      state.reports[familyName] = { type: reportType };
       renderShelterFamilies();
     }
   } catch (error) {
@@ -967,6 +1165,7 @@ async function startEmergencyEvent() {
     const result = await response.json();
     if (result.success) {
       await loadCurrentEvent();
+      state.reports = {};
       updateEventStatus();
       alert('✓ ארוע חירום התחיל');
     }
@@ -990,171 +1189,13 @@ async function closeEmergencyEvent() {
     const result = await response.json();
     if (result.success) {
       await loadCurrentEvent();
+      state.reports = {};
       updateEventStatus();
       alert('✓ ארוע סגור');
     }
   } catch (error) {
     alert('❌ שגיאה: ' + error);
   }
-}
-
-// ===== LEADER =====
-function openLeaderLogin() {
-  document.getElementById('leaderError').style.display = 'none';
-  document.getElementById('leaderPassword').value = '';
-  showScreen('leaderLoginScreen');
-}
-
-function loginLeader() {
-  const neighborhood = document.getElementById('neighborhoodSelect').value;
-  const password = document.getElementById('leaderPassword').value;
-  
-  if (!neighborhood) {
-    alert('בחר שכונה');
-    return;
-  }
-  
-  if (password === LEADER_PASSWORD) {
-    state.currentUser = 'leader';
-    state.currentNeighborhood = neighborhood;
-    document.getElementById('leaderHeader').textContent = '👥 דיווח משפחות - ' + neighborhood;
-    
-    if (state.currentEvent && state.currentEvent.status === "פתוח") {
-      renderLeaderFamilies();
-    }
-    
-    updateEventStatus();
-    showScreen('leaderDashboardScreen');
-  } else {
-    document.getElementById('leaderError').style.display = 'block';
-  }
-}
-
-function renderLeaderFamilies() {
-  const families = state.families.filter(f => f.neighborhood === state.currentNeighborhood);
-  const container = document.getElementById('familiesLeaderContainer');
-  
-  let html = '<div style="display: flex; flex-direction: column-reverse;">';
-  
-  families.forEach(family => {
-    html += `
-      <div class="family-item" onclick="openDetailReportLeader('${family.name}')">
-        <div class="family-info">
-          <div class="family-name">${family.name}</div>
-          <div class="family-members">${family.members.slice(0, 3).join(", ")}</div>
-        </div>
-        <div style="display: flex; gap: 0.5rem;">
-          <button class="btn-success" onclick="quickReportLeader(event, '${family.name}', 'הכל בסדר')" style="flex: none; margin: 0;">✓</button>
-          <button class="btn-danger" onclick="quickReportLeader(event, '${family.name}', 'צריכים עזרה')" style="flex: none; margin: 0;">🆘</button>
-        </div>
-      </div>
-    `;
-  });
-  
-  html += '</div>';
-  container.innerHTML = html;
-}
-
-function openDetailReportLeader(familyName) {
-  state.currentFamily = state.families.find(f => f.name === familyName);
-  if (!state.currentFamily) return;
-  
-  document.getElementById('detailFamilyNameLeader').textContent = '👤 ' + familyName;
-  
-  let html = '';
-  state.currentFamily.members.forEach((member, index) => {
-    html += `
-      <div class="member-item">
-        <label>${member}</label>
-        <select id="status_leader_${index}" style="width: auto; margin: 0;">
-          <option value="">-- בחר סטטוס --</option>
-          <option value="תקין">✓ תקין</option>
-          <option value="נעדר">✗ נעדר</option>
-          <option value="חירום רפואי">🚑 חירום רפואי</option>
-        </select>
-      </div>
-    `;
-  });
-  
-  document.getElementById('detailMembersLeaderContainer').innerHTML = html;
-  document.getElementById('detailSuccessLeader').style.display = 'none';
-  showScreen('detailReportLeaderScreen');
-}
-
-async function submitDetailReportLeader() {
-  const members = [];
-  state.currentFamily.members.forEach((member, index) => {
-    const status = document.getElementById('status_leader_' + index).value;
-    if (status) {
-      members.push({ name: member, status: status });
-    }
-  });
-  
-  if (members.length === 0) {
-    alert('בחר סטטוס לפחות לחבר אחד');
-    return;
-  }
-  
-  try {
-    const response = await fetch(APPS_SCRIPT_URL, {
-      method: 'POST',
-      body: JSON.stringify({
-        action: 'addReport',
-        eventId: state.currentEvent.id,
-        family: state.currentFamily.name,
-        reportType: 'פירוט',
-        location: state.currentNeighborhood,
-        locationType: 'שכונה',
-        members: members
-      })
-    });
-    
-    const result = await response.json();
-    if (result.success) {
-      document.getElementById('detailSuccessLeader').style.display = 'block';
-      setTimeout(() => {
-        backToLeaderDashboard();
-      }, 1500);
-    }
-  } catch (error) {
-    alert('❌ שגיאה: ' + error);
-  }
-}
-
-async function quickReportLeader(event, familyName, reportType) {
-  event.stopPropagation();
-  
-  if (!state.currentEvent) {
-    alert('אין ארוע חירום פתוח');
-    return;
-  }
-  
-  try {
-    const response = await fetch(APPS_SCRIPT_URL, {
-      method: 'POST',
-      body: JSON.stringify({
-        action: 'addReport',
-        eventId: state.currentEvent.id,
-        family: familyName,
-        reportType: reportType,
-        location: state.currentNeighborhood,
-        locationType: 'שכונה'
-      })
-    });
-    
-    const result = await response.json();
-    if (result.success) {
-      renderLeaderFamilies();
-    }
-  } catch (error) {
-    alert('❌ שגיאה: ' + error);
-  }
-}
-
-function backToLeaderDashboard() {
-  state.currentFamily = null;
-  renderLeaderFamilies();
-  showScreen('leaderDashboardScreen');
 }
 
 // Initialize
