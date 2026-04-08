@@ -372,32 +372,43 @@ async function init() {
   await loadData();
   updateDashboard();
   
-  // עדכון אוטומטי כל 10 שניות
+  // עדכון אוטומטי כל 2 שניות (real-time) - רק אם יש שינוי
   setInterval(async () => {
-    await loadData();
-    updateDashboard();
-  }, 10000);
+    const hasChanged = await loadData();
+    if (hasChanged !== false) {
+      updateDashboard();
+    }
+  }, 2000);
 }
 
 async function loadData() {
   try {
-    const response = await fetch(APPS_SCRIPT_URL + "?action=getNeighborhoods");
-    if (response.ok) state.neighborhoods = await response.json();
-  } catch (error) { console.error("Error:", error); }
-  
-  try {
-    const response = await fetch(APPS_SCRIPT_URL + "?action=getFamilies");
-    if (response.ok) state.families = await response.json();
-  } catch (error) { console.error("Error:", error); }
-  
-  try {
-    const response = await fetch(APPS_SCRIPT_URL + "?action=getAllReports");
+    console.log("Fetching all data...");
+    const response = await fetch(APPS_SCRIPT_URL + "?action=getAllData");
     if (response.ok) {
-      const data = await response.json();
-      state.reports = data.reports || {};
-      state.memberReports = data.memberReports || {};
+      const allData = await response.json();
+      
+      // בדוק אם יש שינוי
+      const oldReportsJson = JSON.stringify(state.reports);
+      
+      state.neighborhoods = allData.neighborhoods || [];
+      state.families = allData.families || [];
+      state.reports = (allData.reports && allData.reports.reports) || {};
+      state.memberReports = (allData.reports && allData.reports.memberReports) || {};
+      
+      const newReportsJson = JSON.stringify(state.reports);
+      
+      // רק עדכן אם יש שינוי בדיווחים
+      if (oldReportsJson !== newReportsJson) {
+        console.log("Data changed - updating dashboard");
+        return true;
+      }
+      return false;
     }
-  } catch (error) { console.error("Error:", error); }
+  } catch (error) { 
+    console.error("Error:", error); 
+    return false;
+  }
 }
 
 function updateDashboard() {

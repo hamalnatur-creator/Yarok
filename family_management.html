@@ -134,19 +134,6 @@ button:hover {
   margin-bottom: 1rem;
 }
 
-.btn-secondary {
-  background: white;
-  border: 2px solid #ddd;
-  color: #333;
-  width: 100%;
-  margin-bottom: 1rem;
-}
-
-.btn-secondary:hover {
-  border-color: #1f4e78;
-  color: #1f4e78;
-}
-
 .btn-back {
   background: white;
   border: 1px solid #ddd;
@@ -160,23 +147,24 @@ button:hover {
   background: #4caf50;
   color: white;
   flex: 1;
+  padding: 10px;
+  margin: 0;
 }
 
 .btn-danger {
   background: #f44336;
   color: white;
   flex: 1;
+  padding: 10px;
+  margin: 0;
 }
 
 .btn-info {
   background: #2196f3;
   color: white;
   flex: 1;
-}
-
-.btn-warning {
-  background: #ff9800;
-  color: white;
+  padding: 10px;
+  margin: 0;
 }
 
 input[type="text"],
@@ -189,13 +177,6 @@ select {
   margin-bottom: 1rem;
   direction: rtl;
   font-family: inherit;
-}
-
-input:focus,
-select:focus {
-  outline: none;
-  border-color: #1f4e78;
-  box-shadow: 0 0 0 3px rgba(31, 78, 120, 0.1);
 }
 
 label {
@@ -227,6 +208,13 @@ label {
   box-shadow: 0 2px 8px rgba(31, 78, 120, 0.1);
 }
 
+.family-item.reported {
+  background: #f1f8f4;
+  border-color: #4caf50;
+  opacity: 0.7;
+  order: 999;
+}
+
 .family-info {
   flex: 1;
 }
@@ -235,6 +223,11 @@ label {
   font-size: 15px;
   font-weight: 700;
   margin-bottom: 0.25rem;
+}
+
+.family-item.reported .family-name {
+  text-decoration: line-through;
+  color: #4caf50;
 }
 
 .family-members {
@@ -255,29 +248,24 @@ label {
   width: auto;
 }
 
-.members-input {
-  background: #f9f9f9;
-  border: 1px solid #eee;
-  border-radius: 8px;
+.event-status {
+  background: #fff3cd;
+  border: 2px solid #ffc107;
   padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  font-weight: 600;
+  color: #856404;
+}
+
+.warning-message {
+  background: #fff3cd;
+  border: 1px solid #ffc107;
+  color: #856404;
+  padding: 1rem;
+  border-radius: 8px;
   margin-bottom: 1rem;
-}
-
-.member-input-group {
-  display: flex;
-  gap: 0.5rem;
-  margin-bottom: 0.75rem;
-}
-
-.member-input-group input {
-  flex: 1;
-  margin-bottom: 0;
-}
-
-.member-input-group button {
-  padding: 8px 12px;
-  margin: 0;
-  width: auto;
 }
 
 .success-message {
@@ -301,12 +289,6 @@ label {
   text-align: center;
 }
 
-.loading {
-  text-align: center;
-  padding: 2rem;
-  color: #999;
-}
-
 .buttons-row {
   display: flex;
   gap: 0.75rem;
@@ -316,6 +298,26 @@ label {
 
 .buttons-row button {
   margin-bottom: 0;
+}
+
+.neighborhood-info {
+  background: #f9f9f9;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  border-left: 5px solid #1f4e78;
+}
+
+.neighborhood-info-title {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: #1f4e78;
+}
+
+.neighborhood-info-leader {
+  font-size: 13px;
+  color: #666;
 }
 
 @media (max-width: 600px) {
@@ -351,17 +353,15 @@ label {
     <button class="btn-primary" onclick="openEmergencySystem()">🚨 מערכת דיווח חירום</button>
   </div>
 
-  <!-- Neighborhood Families Screen -->
-  <div id="neighborhoodFamiliesScreen" class="screen">
+  <!-- Neighborhood Management/Report Screen -->
+  <div id="neighborhoodScreen" class="screen">
     <header>
-      <h1 id="neighborhoodTitle">👥 משפחות השכונה</h1>
+      <h1 id="neighborhoodScreenTitle">👥 שכונה</h1>
     </header>
 
     <button class="btn-back" onclick="goHome()">← חזור</button>
 
-    <button class="btn-primary" onclick="openAddFamilyForm()">➕ הוסף משפחה חדשה</button>
-
-    <div id="familiesContainer"></div>
+    <div id="neighborhoodContent"></div>
   </div>
 
   <!-- Edit Family Screen -->
@@ -370,7 +370,7 @@ label {
       <h1 id="editTitle">✏️ עריכת משפחה</h1>
     </header>
 
-    <button class="btn-back" onclick="backToFamilies()">← חזור</button>
+    <button class="btn-back" onclick="backToNeighborhood()">← חזור</button>
 
     <div class="card">
       <div class="form-group">
@@ -411,7 +411,7 @@ label {
       <h1>➕ משפחה חדשה</h1>
     </header>
 
-    <button class="btn-back" onclick="backToFamilies()">← חזור</button>
+    <button class="btn-back" onclick="backToNeighborhood()">← חזור</button>
 
     <div class="card">
       <div class="form-group">
@@ -443,26 +443,10 @@ label {
     </div>
   </div>
 
-  <!-- Emergency System Redirect -->
-  <div id="emergencyRedirectScreen" class="screen">
-    <header>
-      <h1>🚨 מערכת דיווח חירום</h1>
-    </header>
-
-    <div class="card">
-      <p style="text-align: center; margin-bottom: 1rem;">
-        אתה עומד להיכנס למערכת דיווח חירום
-      </p>
-      <button class="btn-primary" onclick="redirectToEmergency()">כנס למערכת דיווח</button>
-      <button class="btn-secondary" onclick="goHome()">ביטול</button>
-    </div>
-  </div>
-
 </div>
 
 <script>
 const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxKZbw_7VgfPNPbWjQ6lhrZGiBz5RIL8qx8FxDLl-GlIyQY0zs76T_nvrlah8gosjR--A/exec";
-const EMERGENCY_URL = "https://hamalnatur-creator.github.io/Yarok/";
 
 let state = {
   neighborhoods: [],
@@ -473,47 +457,23 @@ let state = {
 };
 
 async function init() {
-  await loadNeighborhoodsFromSheets();
-  await loadFamiliesFromSheets();
-  await loadCurrentEvent();
-  
+  await loadAllData();
   populateNeighborhoodSelects();
   renderNeighborhoodsHome();
 }
 
-async function loadNeighborhoodsFromSheets() {
+async function loadAllData() {
   try {
-    const response = await fetch(APPS_SCRIPT_URL + "?action=getNeighborhoods");
+    const response = await fetch(APPS_SCRIPT_URL + "?action=getAllData");
     if (response.ok) {
-      state.neighborhoods = await response.json();
-      console.log("✓ Neighborhoods loaded:", state.neighborhoods.length);
+      const allData = await response.json();
+      state.neighborhoods = allData.neighborhoods || [];
+      state.families = allData.families || [];
+      state.currentEvent = allData.currentEvent;
+      console.log("✓ All data loaded");
     }
   } catch (error) {
-    console.error("Error loading neighborhoods:", error);
-  }
-}
-
-async function loadFamiliesFromSheets() {
-  try {
-    const response = await fetch(APPS_SCRIPT_URL + "?action=getFamilies");
-    if (response.ok) {
-      state.families = await response.json();
-      console.log("✓ Families loaded:", state.families.length);
-    }
-  } catch (error) {
-    console.error("Error loading families:", error);
-  }
-}
-
-async function loadCurrentEvent() {
-  try {
-    const response = await fetch(APPS_SCRIPT_URL + "?action=getCurrentEvent");
-    if (response.ok) {
-      state.currentEvent = await response.json();
-      console.log("✓ Current event:", state.currentEvent);
-    }
-  } catch (error) {
-    console.error("Error loading current event:", error);
+    console.error("Error loading data:", error);
   }
 }
 
@@ -531,7 +491,6 @@ function populateNeighborhoodSelects() {
 }
 
 function renderNeighborhoodsHome() {
-  // בנר חירום אם יש
   const headerHtml = document.querySelector('header');
   const existingBanner = document.getElementById('emergencyBannerDiv');
   if (existingBanner) existingBanner.remove();
@@ -552,7 +511,6 @@ function renderNeighborhoodsHome() {
     emergencyBanner.innerHTML = '🚨 ארוע חירום פתוח - מצב דיווח ממשיך';
     headerHtml.parentNode.insertBefore(emergencyBanner, headerHtml.nextSibling);
     
-    // הצג כפתור dashboard
     document.getElementById('adminDashboardBtn').style.display = 'block';
   } else {
     document.getElementById('adminDashboardBtn').style.display = 'none';
@@ -565,7 +523,7 @@ function renderNeighborhoodsHome() {
     const count = state.families.filter(f => f.neighborhood === hood.name).length;
     const item = document.createElement('div');
     item.className = 'card-item';
-    item.onclick = () => openNeighborhoodFamilies(hood);
+    item.onclick = () => openNeighborhood(hood);
     item.innerHTML = `
       <div class="card-item-title">${hood.name}</div>
       <div class="card-item-subtitle">👤 ${hood.leader}</div>
@@ -575,49 +533,73 @@ function renderNeighborhoodsHome() {
   });
 }
 
-function openNeighborhoodFamilies(neighborhood) {
+function openNeighborhood(neighborhood) {
   state.currentNeighborhood = neighborhood;
   
   // אם יש ארוע חירום פתוח, מעבר לדיווח
   if (state.currentEvent && state.currentEvent.status === "פתוח") {
-    // כנס לדיווח משפחות עם neighborhood parameter
-    const emergencyUrl = "https://hamalnatur-creator.github.io/Yarok/?neighborhood=" + encodeURIComponent(neighborhood.name);
-    window.location.href = emergencyUrl;
-    return;
+    openNeighborhoodReport(neighborhood);
+  } else {
+    openNeighborhoodManagement(neighborhood);
   }
-  
-  // אחרת, עמוד ניהול משפחות
-  document.getElementById('neighborhoodTitle').textContent = '👥 משפחות ' + neighborhood.name;
-  
-  renderFamiliesList();
-  showScreen('neighborhoodFamiliesScreen');
 }
 
-function renderFamiliesList() {
+function openNeighborhoodReport(neighborhood) {
+  const emergencyUrl = "https://hamalnatur-creator.github.io/Yarok/?neighborhood=" + encodeURIComponent(neighborhood.name);
+  window.location.href = emergencyUrl;
+}
+
+function openNeighborhoodManagement(neighborhood) {
+  document.getElementById('neighborhoodScreenTitle').textContent = '👥 ' + neighborhood.name;
+  renderNeighborhoodManagement();
+  showScreen('neighborhoodScreen');
+}
+
+function renderNeighborhoodManagement() {
   const families = state.families.filter(f => f.neighborhood === state.currentNeighborhood.name);
-  const container = document.getElementById('familiesContainer');
+  const container = document.getElementById('neighborhoodContent');
+  
+  const hood = state.neighborhoods.find(h => h.name === state.currentNeighborhood.name);
+  
+  let html = `
+    <div class="neighborhood-info">
+      <div class="neighborhood-info-title">${state.currentNeighborhood.name}</div>
+      <div class="neighborhood-info-leader">👤 אחראים: ${hood ? hood.leader : "לא מוגדר"}</div>
+    </div>
+    
+    <button class="btn-primary" onclick="openAddFamilyForm()" style="margin-bottom: 1.5rem;">➕ הוסף משפחה חדשה</button>
+    
+    <h2>משפחות בשכונה</h2>
+  `;
   
   if (families.length === 0) {
-    container.innerHTML = '<div class="card" style="text-align: center; color: #999;">אין משפחות בשכונה זו</div>';
-    return;
+    html += '<div class="card" style="text-align: center; color: #999;">אין משפחות בשכונה זו</div>';
+  } else {
+    families.forEach(family => {
+      html += `
+        <div class="family-item">
+          <div class="family-info">
+            <div class="family-name">${family.name}</div>
+            <div class="family-members">${family.members.slice(0, 3).join(", ")}</div>
+          </div>
+          <div class="family-buttons">
+            <button class="btn-info" onclick="openEditFamily('${family.name}')" style="flex: 1;">✏️ עריכה</button>
+          </div>
+        </div>
+      `;
+    });
   }
   
-  let html = '';
-  families.forEach(family => {
-    html += `
-      <div class="family-item">
-        <div class="family-info">
-          <div class="family-name">${family.name}</div>
-          <div class="family-members">${family.members.slice(0, 3).join(", ")}</div>
-        </div>
-        <div class="family-buttons">
-          <button class="btn-info" onclick="openEditFamily('${family.name}')" style="flex: 1;">✏️ עריכה</button>
-        </div>
-      </div>
-    `;
-  });
-  
   container.innerHTML = html;
+}
+
+function openAddFamilyForm() {
+  document.getElementById('newFamilyName').value = '';
+  document.getElementById('newFamilyMembers').value = '';
+  document.getElementById('newNeighborhood').value = state.currentNeighborhood.name;
+  document.getElementById('addSuccess').style.display = 'none';
+  document.getElementById('addError').style.display = 'none';
+  showScreen('addFamilyScreen');
 }
 
 function openEditFamily(familyName) {
@@ -658,7 +640,6 @@ async function submitEditFamily() {
     
     const result = await response.json();
     if (result.success) {
-      // עדכן את state
       const index = state.families.findIndex(f => f.name === state.editingFamily.name);
       if (index !== -1) {
         state.families[index] = {
@@ -671,7 +652,7 @@ async function submitEditFamily() {
       
       document.getElementById('editSuccess').style.display = 'block';
       setTimeout(() => {
-        backToFamilies();
+        backToNeighborhood();
       }, 1500);
     } else {
       document.getElementById('editError').style.display = 'block';
@@ -696,27 +677,17 @@ async function deleteFamily() {
     
     const result = await response.json();
     if (result.success) {
-      // הסר מ-state
       state.families = state.families.filter(f => f.name !== state.editingFamily.name);
       
       document.getElementById('editSuccess').style.display = 'block';
       document.getElementById('editSuccess').innerHTML = '✓ המשפחה נמחקה!';
       setTimeout(() => {
-        backToFamilies();
+        backToNeighborhood();
       }, 1500);
     }
   } catch (error) {
     console.error("Error:", error);
   }
-}
-
-function openAddFamilyForm() {
-  document.getElementById('newFamilyName').value = '';
-  document.getElementById('newFamilyMembers').value = '';
-  document.getElementById('newNeighborhood').value = state.currentNeighborhood.name;
-  document.getElementById('addSuccess').style.display = 'none';
-  document.getElementById('addError').style.display = 'none';
-  showScreen('addFamilyScreen');
 }
 
 async function submitAddFamily() {
@@ -751,7 +722,7 @@ async function submitAddFamily() {
       
       document.getElementById('addSuccess').style.display = 'block';
       setTimeout(() => {
-        backToFamilies();
+        backToNeighborhood();
       }, 1500);
     } else {
       document.getElementById('addError').style.display = 'block';
@@ -763,15 +734,11 @@ async function submitAddFamily() {
 }
 
 function openEmergencySystem() {
-  showScreen('emergencyRedirectScreen');
+  window.location.href = "https://hamalnatur-creator.github.io/Yarok/";
 }
 
 function openAdminDashboard() {
   window.location.href = "https://hamalnatur-creator.github.io/Yarok/admin_dashboard.html";
-}
-
-function redirectToEmergency() {
-  window.location.href = EMERGENCY_URL;
 }
 
 function showScreen(screenId) {
@@ -785,9 +752,9 @@ function goHome() {
   showScreen('homeScreen');
 }
 
-function backToFamilies() {
-  renderFamiliesList();
-  showScreen('neighborhoodFamiliesScreen');
+function backToNeighborhood() {
+  renderNeighborhoodManagement();
+  showScreen('neighborhoodScreen');
 }
 
 // Initialize

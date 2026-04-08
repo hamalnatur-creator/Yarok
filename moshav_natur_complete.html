@@ -1,0 +1,1193 @@
+<!DOCTYPE html>
+<html dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>מערכת דיווח חירום - מושב נטור</title>
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  color: #333;
+  direction: rtl;
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.screen {
+  display: none;
+  animation: fadeIn 0.3s ease-in;
+}
+
+.screen.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+header {
+  text-align: center;
+  margin-bottom: 2rem;
+  padding: 2rem 0;
+}
+
+h1 {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: #1f4e78;
+}
+
+h2 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: #1f4e78;
+  text-align: right;
+}
+
+.subtitle {
+  font-size: 16px;
+  color: #666;
+  font-weight: 500;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.card-item {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  cursor: pointer;
+  transition: all 0.3s;
+  border-left: 5px solid #1f4e78;
+  text-align: right;
+}
+
+.card-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+
+.card-item-title {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: #1f4e78;
+}
+
+.card-item-subtitle {
+  font-size: 12px;
+  color: #999;
+}
+
+.event-status {
+  background: #fff3cd;
+  border: 2px solid #ffc107;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  font-weight: 600;
+  color: #856404;
+}
+
+button {
+  padding: 14px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 600;
+  transition: all 0.2s;
+  text-align: right;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #1f4e78 0%, #163a5c 100%);
+  color: white;
+  width: 100%;
+  padding: 18px;
+  font-size: 16px;
+  margin-bottom: 1rem;
+}
+
+.btn-secondary {
+  background: white;
+  border: 2px solid #ddd;
+  color: #333;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.btn-secondary:hover {
+  border-color: #1f4e78;
+  color: #1f4e78;
+}
+
+.btn-success {
+  background: #4caf50;
+  color: white;
+  padding: 8px 10px;
+  font-size: 13px;
+  margin: 0;
+}
+
+.btn-success:hover {
+  background: #45a049;
+}
+
+.btn-danger {
+  background: #f44336;
+  color: white;
+  padding: 8px 10px;
+  font-size: 13px;
+  margin: 0;
+}
+
+.btn-danger:hover {
+  background: #da190b;
+}
+
+.btn-info {
+  background: #2196f3;
+  color: white;
+  padding: 8px 10px;
+  font-size: 13px;
+  margin: 0;
+}
+
+.btn-info:hover {
+  background: #1976d2;
+}
+
+.btn-warning {
+  background: #ff9800;
+  color: white;
+  padding: 8px 10px;
+  font-size: 13px;
+}
+
+.btn-warning:hover {
+  background: #e68900;
+}
+
+.card {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.back-btn {
+  background: white;
+  border: 1px solid #ddd;
+  padding: 10px 16px;
+  font-size: 14px;
+  margin-bottom: 1.5rem;
+  width: auto;
+}
+
+input[type="text"],
+input[type="password"],
+select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+  margin-bottom: 1rem;
+  direction: rtl;
+  font-family: inherit;
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  border-color: #1f4e78;
+  box-shadow: 0 0 0 3px rgba(31, 78, 120, 0.1);
+}
+
+label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #666;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.family-item {
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 0.75rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.2s;
+}
+
+.family-item:hover {
+  border-color: #1f4e78;
+  box-shadow: 0 2px 8px rgba(31, 78, 120, 0.1);
+}
+
+.family-item.reported {
+  background: #f1f8f4;
+  border-color: #4caf50;
+  opacity: 0.7;
+  order: 999;
+}
+
+.family-info {
+  flex: 1;
+}
+
+.family-name {
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+.family-item.reported .family-name {
+  text-decoration: line-through;
+  color: #4caf50;
+}
+
+.family-members {
+  font-size: 12px;
+  color: #999;
+}
+
+.family-status {
+  font-size: 12px;
+  color: #4caf50;
+  font-weight: 700;
+}
+
+.family-buttons {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.members-list {
+  background: #f9f9f9;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.member-item {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem;
+  border-bottom: 1px solid #eee;
+}
+
+.member-item:last-child {
+  border-bottom: none;
+}
+
+.member-item label {
+  margin: 0;
+  flex: 1;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 400;
+}
+
+.member-item select {
+  width: auto;
+  margin: 0;
+  padding: 6px 8px;
+  font-size: 12px;
+}
+
+.response-buttons {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.success-message {
+  background: #c8e6c9;
+  border: 1px solid #81c784;
+  color: #2e7d32;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  text-align: center;
+  font-weight: 500;
+}
+
+.error-message {
+  background: #ffcdd2;
+  border: 1px solid #f44336;
+  color: #c62828;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.warning-message {
+  background: #fff3cd;
+  border: 1px solid #ffc107;
+  color: #856404;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 600px) {
+  h1 {
+    font-size: 24px;
+  }
+  
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .family-buttons {
+    flex-direction: column;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <!-- Home Screen -->
+  <div id="homeScreen" class="screen active">
+    <header>
+      <h1>🚨 מערכת דיווח חירום</h1>
+      <p class="subtitle">מושב נטור</p>
+    </header>
+
+    <div id="eventStatusHome" class="event-status" style="display: none;">
+      ⏸️ ארוע חירום פתוח כרגע
+    </div>
+
+    <h2>🏘️ דיווח משכונות</h2>
+    <div id="neighborhoodsGrid" class="grid" style="margin-bottom: 2rem;"></div>
+
+    <h2>אפשרויות נוספות</h2>
+    <button class="btn-primary" onclick="openSheltersHome()">📍 דיווח ממקלט / מיגוניות</button>
+    <button class="btn-primary" onclick="openAdminLogin()">🔐 כניסה מנהל</button>
+  </div>
+
+  <!-- Neighborhoods Selector Screen -->
+  <div id="neighborhoodsSelectScreen" class="screen">
+    <header>
+      <h1>🏘️ בחר שכונה</h1>
+      <p class="subtitle">לדיווח משפחות</p>
+    </header>
+
+    <button class="back-btn" onclick="goHome()">← חזור</button>
+
+    <div id="neighborhoodsSelectGrid" class="grid"></div>
+  </div>
+
+  <!-- Neighborhood Emergency Report Screen -->
+  <div id="neighborhoodEmergencyScreen" class="screen">
+    <header>
+      <h1 id="neighborhoodTitle">🏘️ דיווח משכונה</h1>
+    </header>
+
+    <button class="back-btn" onclick="goHome()">← חזור</button>
+
+    <div id="eventStatusNeighborhood" class="event-status" style="display: none;">
+      ⏸️ ארוע חירום פתוח
+    </div>
+
+    <div id="eventClosedWarningNeighborhood" class="warning-message" style="display: none;">
+      ⚠️ אין ארוע חירום פתוח כרגע
+    </div>
+
+    <div id="familiesNeighborhoodContainer"></div>
+  </div>
+
+  <!-- Detail Report Neighborhood -->
+  <div id="detailReportNeighborhoodScreen" class="screen">
+    <header>
+      <h1 id="detailFamilyNameNeighborhood">👤 פרטי משפחה</h1>
+    </header>
+
+    <button class="back-btn" onclick="backToNeighborhoodEmergency()">← חזור</button>
+
+    <div class="card">
+      <h3 style="margin-bottom: 1rem;">בחר סטטוס לכל חבר משפחה:</h3>
+      <div id="detailMembersNeighborhoodContainer" class="members-list"></div>
+
+      <div class="response-buttons" style="margin-top: 1.5rem;">
+        <button class="btn-success" onclick="submitDetailReportNeighborhood()" style="flex: 1; padding: 12px;">✓ שלח דיווח</button>
+        <button class="back-btn" onclick="backToNeighborhoodEmergency()" style="flex: 1; padding: 12px;">ביטול</button>
+      </div>
+    </div>
+
+    <div id="detailSuccessNeighborhood" class="success-message" style="display: none;">
+      ✓ דיווח בוצע בהצלחה!
+    </div>
+  </div>
+
+  <!-- Edit Report Screen -->
+  <div id="editReportScreen" class="screen">
+    <header>
+      <h1 id="editFamilyName">✏️ עריכת דיווח</h1>
+    </header>
+
+    <button class="back-btn" onclick="cancelEditReport()">← חזור</button>
+
+    <div class="card">
+      <h3 style="margin-bottom: 1rem;">בחר סטטוס חדש לכל חבר:</h3>
+      <div id="editMembersContainer" class="members-list"></div>
+
+      <div class="response-buttons" style="margin-top: 1.5rem;">
+        <button class="btn-info" onclick="submitEditReport()" style="flex: 1; padding: 12px;">✓ עדכן דיווח</button>
+        <button class="btn-danger" onclick="cancelEditReport()" style="flex: 1; padding: 12px;">ביטול</button>
+      </div>
+    </div>
+
+    <div id="editSuccess" class="success-message" style="display: none;">
+      ✓ הדיווח עודכן בהצלחה!
+    </div>
+  </div>
+
+  <!-- Shelters Home Screen -->
+  <div id="sheltersHomeScreen" class="screen">
+    <header>
+      <h1>📍 בחר מקלט או מיגוניות</h1>
+      <p class="subtitle">לחץ לדיווח</p>
+    </header>
+
+    <button class="back-btn" onclick="goHome()">← חזור</button>
+
+    <div id="sheltersGrid" class="grid"></div>
+  </div>
+
+  <!-- Shelter Report Screen -->
+  <div id="shelterReportScreen" class="screen">
+    <header>
+      <h1 id="shelterTitle">📍 דיווח</h1>
+    </header>
+
+    <button class="back-btn" onclick="goHome()">← חזור</button>
+
+    <div id="eventStatusShelter" class="event-status" style="display: none;">
+      ⏸️ ארוע חירום פתוח
+    </div>
+
+    <div id="eventClosedWarningShelter" class="warning-message" style="display: none;">
+      ⚠️ אין ארוע חירום פתוח כרגע
+    </div>
+
+    <div id="familiesShelterContainer"></div>
+  </div>
+
+  <!-- Detail Report Shelter -->
+  <div id="detailReportShelterScreen" class="screen">
+    <header>
+      <h1 id="detailFamilyNameShelter">👤 פרטי משפחה</h1>
+    </header>
+
+    <button class="back-btn" onclick="backToShelterReport()">← חזור</button>
+
+    <div class="card">
+      <h3 style="margin-bottom: 1rem;">בחר סטטוס לכל חבר משפחה:</h3>
+      <div id="detailMembersShelterContainer" class="members-list"></div>
+
+      <div class="response-buttons" style="margin-top: 1.5rem;">
+        <button class="btn-success" onclick="submitDetailReportShelter()" style="flex: 1; padding: 12px;">✓ שלח דיווח</button>
+        <button class="back-btn" onclick="backToShelterReport()" style="flex: 1; padding: 12px;">ביטול</button>
+      </div>
+    </div>
+
+    <div id="detailSuccessShelter" class="success-message" style="display: none;">
+      ✓ דיווח בוצע בהצלחה!
+    </div>
+  </div>
+
+  <!-- Admin Login -->
+  <div id="adminLoginScreen" class="screen">
+    <header>
+      <h1>🔐 כניסה מנהל</h1>
+    </header>
+
+    <button class="back-btn" onclick="goHome()">← חזור</button>
+
+    <div class="card">
+      <div class="form-group">
+        <label>קוד כניסה:</label>
+        <input type="password" id="adminCode" placeholder="הקלד קוד" onkeypress="if(event.key==='Enter') loginAdmin()">
+      </div>
+      <button class="btn-primary" onclick="loginAdmin()">כניסה</button>
+      <div id="adminError" class="error-message" style="display: none;">❌ קוד שגוי</div>
+    </div>
+  </div>
+
+  <!-- Admin Dashboard -->
+  <div id="adminDashboardScreen" class="screen">
+    <header>
+      <h1>📊 לוח בקרה - מנהל</h1>
+    </header>
+
+    <button class="back-btn" onclick="logout()">🚪 התנתקות</button>
+
+    <div id="eventStatusAdmin" class="event-status" style="display: none;"></div>
+
+    <div class="card">
+      <h2 style="margin-bottom: 0;">ניהול ארוע</h2>
+      <button class="btn-primary" onclick="startEmergencyEvent()">🚨 פתח ארוע חירום</button>
+      <button class="btn-danger" id="closeEventBtn" onclick="closeEmergencyEvent()" style="display: none; width: 100%; margin-bottom: 0;">סגור ארוע חירום</button>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw7Wcg9Cy4t251wQLaDh06U88XVa6KYbORIxL-CImBxVzJJaVJmmd9WcMaFnZZ5ng2etw/exec";
+
+let state = {
+  currentUser: null,
+  currentEvent: null,
+  currentShelter: null,
+  currentNeighborhood: null,
+  currentFamily: null,
+  editingReport: null,
+  families: [],
+  neighborhoods: [],
+  shelters: [],
+  reports: {}
+};
+
+async function init() {
+  await loadAllData();
+  renderNeighborhoodsHome();
+  checkShelterParameter();
+  updateEventStatus();
+}
+
+async function loadAllData() {
+  try {
+    const response = await fetch(APPS_SCRIPT_URL + "?action=getAllData");
+    if (response.ok) {
+      const allData = await response.json();
+      state.families = allData.families || [];
+      state.neighborhoods = allData.neighborhoods || [];
+      state.shelters = allData.shelters || [];
+      state.currentEvent = allData.currentEvent;
+      console.log("✓ All data loaded in one request");
+    }
+  } catch (error) {
+    console.error("Error loading data:", error);
+  }
+}
+
+function renderNeighborhoodsHome() {
+  console.log("renderNeighborhoodsHome called, neighborhoods count:", state.neighborhoods.length);
+  const grid = document.getElementById('neighborhoodsGrid');
+  
+  if (!grid) {
+    console.error("Grid element not found!");
+    return;
+  }
+  
+  if (!state.neighborhoods || state.neighborhoods.length === 0) {
+    console.warn("No neighborhoods to render");
+    grid.innerHTML = '<div style="padding: 1rem; color: red;">❌ לא נטענו שכונות</div>';
+    return;
+  }
+  
+  grid.innerHTML = '';
+  
+  state.neighborhoods.forEach(hood => {
+    console.log("Creating card for:", hood.name);
+    const item = document.createElement('div');
+    item.className = 'card-item';
+    item.onclick = () => openNeighborhoodsSelect();
+    item.innerHTML = `
+      <div class="card-item-title">${hood.name}</div>
+      <div class="card-item-subtitle">👤 ${hood.leader}</div>
+    `;
+    grid.appendChild(item);
+  });
+}
+
+function openNeighborhoodsSelect() {
+  renderNeighborhoodsSelectGrid();
+  showScreen('neighborhoodsSelectScreen');
+}
+
+function renderNeighborhoodsSelectGrid() {
+  const grid = document.getElementById('neighborhoodsSelectGrid');
+  grid.innerHTML = '';
+  
+  state.neighborhoods.forEach(hood => {
+    const item = document.createElement('div');
+    item.className = 'card-item';
+    item.onclick = () => openNeighborhoodEmergency(hood);
+    item.innerHTML = `
+      <div class="card-item-title">${hood.name}</div>
+      <div class="card-item-subtitle">👤 ${hood.leader}</div>
+    `;
+    grid.appendChild(item);
+  });
+}
+
+function openNeighborhoodEmergency(neighborhood) {
+  state.currentNeighborhood = neighborhood;
+  document.getElementById('neighborhoodTitle').textContent = '🏘️ ' + neighborhood.name;
+  
+  if (state.currentEvent && state.currentEvent.status === "פתוח") {
+    renderNeighborhoodFamilies();
+  }
+  
+  updateEventStatus();
+  showScreen('neighborhoodEmergencyScreen');
+}
+
+function renderNeighborhoodFamilies() {
+  const families = state.families.filter(f => f.neighborhood === state.currentNeighborhood.name);
+  const container = document.getElementById('familiesNeighborhoodContainer');
+  
+  let html = '<div style="display: flex; flex-direction: column-reverse;">';
+  
+  families.forEach(family => {
+    const isReported = state.reports[family.name];
+    const reportedClass = isReported ? 'reported' : '';
+    
+    html += `
+      <div class="family-item ${reportedClass}">
+        <div class="family-info">
+          <div class="family-name">${family.name}</div>
+          <div class="family-members">${family.members.slice(0, 3).join(", ")}</div>
+        </div>
+        <div class="family-buttons">
+          <button class="btn-success" onclick="quickReportNeighborhood(event, '${family.name}', 'הכל בסדר')">✓</button>
+          <button class="btn-info" onclick="openDetailReportNeighborhood('${family.name}')">📋</button>
+          <button class="btn-danger" onclick="quickReportNeighborhood(event, '${family.name}', 'צריכים עזרה')">🆘</button>
+          ${isReported ? `<button class="btn-warning" onclick="openEditReport('${family.name}')">✏️</button>` : ''}
+        </div>
+      </div>
+    `;
+  });
+  
+  html += '</div>';
+  container.innerHTML = html;
+}
+
+function openDetailReportNeighborhood(familyName) {
+  state.currentFamily = state.families.find(f => f.name === familyName);
+  if (!state.currentFamily) return;
+  
+  document.getElementById('detailFamilyNameNeighborhood').textContent = '👤 ' + familyName;
+  
+  let html = '';
+  state.currentFamily.members.forEach((member, index) => {
+    html += `
+      <div class="member-item">
+        <label>${member}</label>
+        <select id="status_neighborhood_${index}">
+          <option value="">-- בחר סטטוס --</option>
+          <option value="תקין">✓ תקין</option>
+          <option value="נעדר">✗ נעדר</option>
+          <option value="חירום רפואי">🚑 חירום רפואי</option>
+        </select>
+      </div>
+    `;
+  });
+  
+  document.getElementById('detailMembersNeighborhoodContainer').innerHTML = html;
+  document.getElementById('detailSuccessNeighborhood').style.display = 'none';
+  showScreen('detailReportNeighborhoodScreen');
+}
+
+async function submitDetailReportNeighborhood() {
+  const members = [];
+  state.currentFamily.members.forEach((member, index) => {
+    const status = document.getElementById('status_neighborhood_' + index).value;
+    if (status) {
+      members.push({ name: member, status: status });
+    }
+  });
+  
+  if (members.length === 0) {
+    alert('בחר סטטוס לפחות לחבר אחד');
+    return;
+  }
+  
+  try {
+    const response = await fetch(APPS_SCRIPT_URL, {
+      method: 'POST',
+      body: JSON.stringify({
+        action: 'addReport',
+        eventId: state.currentEvent.id,
+        family: state.currentFamily.name,
+        reportType: 'פירוט',
+        location: state.currentNeighborhood.name,
+        locationType: 'שכונה',
+        members: members
+      })
+    });
+    
+    const result = await response.json();
+    if (result.success) {
+      state.reports[state.currentFamily.name] = { type: 'פירוט', members: members };
+      document.getElementById('detailSuccessNeighborhood').style.display = 'block';
+      setTimeout(() => {
+        backToNeighborhoodEmergency();
+      }, 1500);
+    }
+  } catch (error) {
+    alert('❌ שגיאה: ' + error);
+  }
+}
+
+async function quickReportNeighborhood(event, familyName, reportType) {
+  event.stopPropagation();
+  
+  if (!state.currentEvent) {
+    alert('אין ארוע חירום פתוח');
+    return;
+  }
+  
+  try {
+    const response = await fetch(APPS_SCRIPT_URL, {
+      method: 'POST',
+      body: JSON.stringify({
+        action: 'addReport',
+        eventId: state.currentEvent.id,
+        family: familyName,
+        reportType: reportType,
+        location: state.currentNeighborhood.name,
+        locationType: 'שכונה'
+      })
+    });
+    
+    const result = await response.json();
+    if (result.success) {
+      state.reports[familyName] = { type: reportType };
+      renderNeighborhoodFamilies();
+    }
+  } catch (error) {
+    alert('❌ שגיאה: ' + error);
+  }
+}
+
+function openEditReport(familyName) {
+  state.currentFamily = state.families.find(f => f.name === familyName);
+  state.editingReport = familyName;
+  
+  document.getElementById('editFamilyName').textContent = '✏️ עריכת דיווח - ' + familyName;
+  
+  let html = '';
+  state.currentFamily.members.forEach((member, index) => {
+    html += `
+      <div class="member-item">
+        <label>${member}</label>
+        <select id="edit_status_${index}">
+          <option value="">-- בחר סטטוס --</option>
+          <option value="תקין">✓ תקין</option>
+          <option value="נעדר">✗ נעדר</option>
+          <option value="חירום רפואי">🚑 חירום רפואי</option>
+        </select>
+      </div>
+    `;
+  });
+  
+  document.getElementById('editMembersContainer').innerHTML = html;
+  document.getElementById('editSuccess').style.display = 'none';
+  showScreen('editReportScreen');
+}
+
+async function submitEditReport() {
+  const members = [];
+  state.currentFamily.members.forEach((member, index) => {
+    const status = document.getElementById('edit_status_' + index).value;
+    if (status) {
+      members.push({ name: member, status: status });
+    }
+  });
+  
+  if (members.length === 0) {
+    alert('בחר סטטוס לפחות לחבר אחד');
+    return;
+  }
+  
+  try {
+    const response = await fetch(APPS_SCRIPT_URL, {
+      method: 'POST',
+      body: JSON.stringify({
+        action: 'addReport',
+        eventId: state.currentEvent.id,
+        family: state.editingReport,
+        reportType: 'פירוט',
+        location: state.currentNeighborhood.name,
+        locationType: 'שכונה',
+        members: members
+      })
+    });
+    
+    const result = await response.json();
+    if (result.success) {
+      state.reports[state.editingReport] = { type: 'פירוט', members: members };
+      document.getElementById('editSuccess').style.display = 'block';
+      setTimeout(() => {
+        backToNeighborhoodEmergency();
+      }, 1500);
+    }
+  } catch (error) {
+    alert('❌ שגיאה: ' + error);
+  }
+}
+
+function cancelEditReport() {
+  state.editingReport = null;
+  backToNeighborhoodEmergency();
+}
+
+function backToNeighborhoodEmergency() {
+  state.currentFamily = null;
+  state.editingReport = null;
+  renderNeighborhoodFamilies();
+  showScreen('neighborhoodEmergencyScreen');
+}
+
+function showScreen(screenId) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(screenId).classList.add('active');
+}
+
+function goHome() {
+  state.currentUser = null;
+  state.currentShelter = null;
+  state.currentFamily = null;
+  state.currentNeighborhood = null;
+  updateEventStatus();
+  showScreen('homeScreen');
+}
+
+function logout() {
+  goHome();
+}
+
+function updateEventStatus() {
+  const isEventOpen = state.currentEvent && state.currentEvent.status === "פתוח";
+  
+  document.getElementById('eventStatusHome').style.display = isEventOpen ? 'block' : 'none';
+  
+  if (document.getElementById('eventStatusAdmin')) {
+    if (isEventOpen) {
+      document.getElementById('eventStatusAdmin').style.display = 'block';
+      document.getElementById('eventStatusAdmin').innerHTML = '🚨 ארוע חירום פתוח | פתוח ב: ' + state.currentEvent.timeOpen;
+      document.getElementById('closeEventBtn').style.display = 'block';
+    } else {
+      document.getElementById('eventStatusAdmin').style.display = 'none';
+      document.getElementById('closeEventBtn').style.display = 'none';
+    }
+  }
+  
+  document.getElementById('eventStatusNeighborhood').style.display = isEventOpen ? 'block' : 'none';
+  document.getElementById('eventClosedWarningNeighborhood').style.display = isEventOpen ? 'none' : 'block';
+  
+  document.getElementById('eventStatusShelter').style.display = isEventOpen ? 'block' : 'none';
+  document.getElementById('eventClosedWarningShelter').style.display = isEventOpen ? 'none' : 'block';
+}
+
+function checkShelterParameter() {
+  const params = new URLSearchParams(window.location.search);
+  const shelterId = params.get('shelter');
+  const neighborhoodName = params.get('neighborhood');
+  
+  if (neighborhoodName) {
+    const neighborhood = state.neighborhoods.find(n => n.name === neighborhoodName);
+    if (neighborhood) {
+      openNeighborhoodEmergency(neighborhood);
+      return;
+    }
+  }
+  
+  if (shelterId) {
+    const shelter = state.shelters.find(s => s.id == shelterId);
+    if (shelter) {
+      state.currentShelter = shelter;
+      openShelterReport(shelter);
+    }
+  }
+}
+
+// ===== SHELTERS =====
+function openSheltersHome() {
+  renderSheltersHome();
+  showScreen('sheltersHomeScreen');
+}
+
+function renderSheltersHome() {
+  const grid = document.getElementById('sheltersGrid');
+  grid.innerHTML = '';
+  
+  state.shelters.forEach(shelter => {
+    const item = document.createElement('div');
+    item.className = 'card-item';
+    item.onclick = () => openShelterReport(shelter);
+    item.innerHTML = `
+      <div class="card-item-title">${shelter.name}</div>
+      <div class="card-item-subtitle">${shelter.type}</div>
+    `;
+    grid.appendChild(item);
+  });
+}
+
+function openShelterReport(shelter) {
+  state.currentShelter = shelter;
+  document.getElementById('shelterTitle').textContent = '📍 דיווח מ' + shelter.name;
+  
+  if (state.currentEvent && state.currentEvent.status === "פתוח") {
+    renderShelterFamilies();
+  }
+  
+  updateEventStatus();
+  showScreen('shelterReportScreen');
+}
+
+function renderShelterFamilies() {
+  const container = document.getElementById('familiesShelterContainer');
+  container.innerHTML = '';
+  
+  let html = '<div style="display: flex; flex-direction: column-reverse;">';
+  
+  state.families.forEach(family => {
+    const isReported = state.reports[family.name];
+    const reportedClass = isReported ? 'reported' : '';
+    
+    html += `
+      <div class="family-item ${reportedClass}">
+        <div class="family-info">
+          <div class="family-name">${family.name}</div>
+          <div class="family-members">${family.members.slice(0, 3).join(", ")}</div>
+        </div>
+        <div class="family-buttons">
+          <button class="btn-success" onclick="quickReportShelter(event, '${family.name}', 'הכל בסדר')">✓</button>
+          <button class="btn-info" onclick="openDetailReportShelter('${family.name}')">📋</button>
+          <button class="btn-danger" onclick="quickReportShelter(event, '${family.name}', 'צריכים עזרה')">🆘</button>
+          ${isReported ? `<button class="btn-warning" onclick="openEditReport('${family.name}')">✏️</button>` : ''}
+        </div>
+      </div>
+    `;
+  });
+  
+  html += '</div>';
+  container.innerHTML = html;
+}
+
+function openDetailReportShelter(familyName) {
+  state.currentFamily = state.families.find(f => f.name === familyName);
+  if (!state.currentFamily) return;
+  
+  document.getElementById('detailFamilyNameShelter').textContent = '👤 ' + familyName;
+  
+  let html = '';
+  state.currentFamily.members.forEach((member, index) => {
+    html += `
+      <div class="member-item">
+        <label>${member}</label>
+        <select id="status_shelter_${index}">
+          <option value="">-- בחר סטטוס --</option>
+          <option value="תקין">✓ תקין</option>
+          <option value="נעדר">✗ נעדר</option>
+          <option value="חירום רפואי">🚑 חירום רפואי</option>
+        </select>
+      </div>
+    `;
+  });
+  
+  document.getElementById('detailMembersShelterContainer').innerHTML = html;
+  document.getElementById('detailSuccessShelter').style.display = 'none';
+  showScreen('detailReportShelterScreen');
+}
+
+async function submitDetailReportShelter() {
+  const members = [];
+  state.currentFamily.members.forEach((member, index) => {
+    const status = document.getElementById('status_shelter_' + index).value;
+    if (status) {
+      members.push({ name: member, status: status });
+    }
+  });
+  
+  if (members.length === 0) {
+    alert('בחר סטטוס לפחות לחבר אחד');
+    return;
+  }
+  
+  try {
+    const response = await fetch(APPS_SCRIPT_URL, {
+      method: 'POST',
+      body: JSON.stringify({
+        action: 'addReport',
+        eventId: state.currentEvent.id,
+        family: state.currentFamily.name,
+        reportType: 'פירוט',
+        location: state.currentShelter.name,
+        locationType: state.currentShelter.type,
+        members: members
+      })
+    });
+    
+    const result = await response.json();
+    if (result.success) {
+      state.reports[state.currentFamily.name] = { type: 'פירוט', members: members };
+      document.getElementById('detailSuccessShelter').style.display = 'block';
+      setTimeout(() => {
+        backToShelterReport();
+      }, 1500);
+    }
+  } catch (error) {
+    alert('❌ שגיאה: ' + error);
+  }
+}
+
+async function quickReportShelter(event, familyName, reportType) {
+  event.stopPropagation();
+  
+  if (!state.currentEvent) {
+    alert('אין ארוע חירום פתוח');
+    return;
+  }
+  
+  try {
+    const response = await fetch(APPS_SCRIPT_URL, {
+      method: 'POST',
+      body: JSON.stringify({
+        action: 'addReport',
+        eventId: state.currentEvent.id,
+        family: familyName,
+        reportType: reportType,
+        location: state.currentShelter.name,
+        locationType: state.currentShelter.type
+      })
+    });
+    
+    const result = await response.json();
+    if (result.success) {
+      state.reports[familyName] = { type: reportType };
+      renderShelterFamilies();
+    }
+  } catch (error) {
+    alert('❌ שגיאה: ' + error);
+  }
+}
+
+function backToShelterReport() {
+  state.currentFamily = null;
+  renderShelterFamilies();
+  showScreen('shelterReportScreen');
+}
+
+// ===== ADMIN =====
+function openAdminLogin() {
+  document.getElementById('adminError').style.display = 'none';
+  document.getElementById('adminCode').value = '';
+  showScreen('adminLoginScreen');
+}
+
+function loginAdmin() {
+  const code = document.getElementById('adminCode').value;
+  if (code === '12345') {
+    state.currentUser = 'admin';
+    updateEventStatus();
+    showScreen('adminDashboardScreen');
+  } else {
+    document.getElementById('adminError').style.display = 'block';
+  }
+}
+
+async function startEmergencyEvent() {
+  try {
+    const response = await fetch(APPS_SCRIPT_URL, {
+      method: 'POST',
+      body: JSON.stringify({
+        action: 'createEvent',
+        openedBy: 'מנהל'
+      })
+    });
+    
+    const result = await response.json();
+    if (result.success) {
+      await loadCurrentEvent();
+      state.reports = {};
+      updateEventStatus();
+      alert('✓ ארוע חירום התחיל');
+    }
+  } catch (error) {
+    alert('❌ שגיאה: ' + error);
+  }
+}
+
+async function closeEmergencyEvent() {
+  if (!state.currentEvent) return;
+  
+  try {
+    const response = await fetch(APPS_SCRIPT_URL, {
+      method: 'POST',
+      body: JSON.stringify({
+        action: 'closeEvent',
+        eventId: state.currentEvent.id
+      })
+    });
+    
+    const result = await response.json();
+    if (result.success) {
+      await loadCurrentEvent();
+      state.reports = {};
+      updateEventStatus();
+      alert('✓ ארוע סגור');
+    }
+  } catch (error) {
+    alert('❌ שגיאה: ' + error);
+  }
+}
+
+// Initialize
+init();
+</script>
+
+</body>
+</html>
