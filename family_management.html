@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ניהול משפחות - מושב נטור</title>
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  color: #333;
+  direction: rtl;
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 2rem;
+  padding: 2rem 0;
+}
+
+h1 {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: #1f4e78;
+}
+
+h2 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: #1f4e78;
+  text-align: right;
+}
+
+.subtitle {
+  font-size: 16px;
+  color: #666;
+  font-weight: 500;
+}
+
+.screen {
+  display: none;
+}
+
+.screen.active {
+  display: block;
+  animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.card-item {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  cursor: pointer;
+  transition: all 0.3s;
+  border-left: 5px solid #1f4e78;
+  text-align: right;
+}
+
+.card-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+
+.card-item-title {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: #1f4e78;
+}
+
+.card-item-subtitle {
+  font-size: 12px;
+  color: #999;
+}
+
+.card {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+button {
+  padding: 12px 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.2s;
+  text-align: right;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #1f4e78 0%, #163a5c 100%);
+  color: white;
+  width: 100%;
+  padding: 18px;
+  font-size: 16px;
+  margin-bottom: 1rem;
+}
+
+.btn-secondary {
+  background: white;
+  border: 2px solid #ddd;
+  color: #333;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.btn-secondary:hover {
+  border-color: #1f4e78;
+  color: #1f4e78;
+}
+
+.btn-back {
+  background: white;
+  border: 1px solid #ddd;
+  padding: 10px 16px;
+  font-size: 14px;
+  margin-bottom: 1.5rem;
+  width: auto;
+}
+
+.btn-success {
+  background: #4caf50;
+  color: white;
+  flex: 1;
+}
+
+.btn-danger {
+  background: #f44336;
+  color: white;
+  flex: 1;
+}
+
+.btn-info {
+  background: #2196f3;
+  color: white;
+  flex: 1;
+}
+
+.btn-warning {
+  background: #ff9800;
+  color: white;
+}
+
+input[type="text"],
+select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+  margin-bottom: 1rem;
+  direction: rtl;
+  font-family: inherit;
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  border-color: #1f4e78;
+  box-shadow: 0 0 0 3px rgba(31, 78, 120, 0.1);
+}
+
+label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #666;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.family-item {
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 0.75rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.2s;
+}
+
+.family-item:hover {
+  border-color: #1f4e78;
+  box-shadow: 0 2px 8px rgba(31, 78, 120, 0.1);
+}
+
+.family-info {
+  flex: 1;
+}
+
+.family-name {
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+.family-members {
+  font-size: 12px;
+  color: #999;
+}
+
+.family-buttons {
+  display: flex;
+  gap: 0.5rem;
+  margin-left: 1rem;
+}
+
+.family-buttons button {
+  padding: 8px 12px;
+  font-size: 12px;
+  margin: 0;
+  width: auto;
+}
+
+.members-input {
+  background: #f9f9f9;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.member-input-group {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.member-input-group input {
+  flex: 1;
+  margin-bottom: 0;
+}
+
+.member-input-group button {
+  padding: 8px 12px;
+  margin: 0;
+  width: auto;
+}
+
+.success-message {
+  background: #c8e6c9;
+  border: 1px solid #81c784;
+  color: #2e7d32;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  text-align: center;
+  font-weight: 500;
+}
+
+.error-message {
+  background: #ffcdd2;
+  border: 1px solid #f44336;
+  color: #c62828;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.loading {
+  text-align: center;
+  padding: 2rem;
+  color: #999;
+}
+
+.buttons-row {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-top: 1.5rem;
+}
+
+.buttons-row button {
+  margin-bottom: 0;
+}
+
+@media (max-width: 600px) {
+  h1 {
+    font-size: 24px;
+  }
+  
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .family-buttons {
+    flex-direction: column;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <!-- Home Screen -->
+  <div id="homeScreen" class="screen active">
+    <header>
+      <h1>👨‍👩‍👧‍👦 ניהול משפחות</h1>
+      <p class="subtitle">מושב נטור - הכנה לחירום</p>
+    </header>
+
+    <h2>🏘️ בחר שכונה</h2>
+    <div id="neighborhoodsGrid" class="grid"></div>
+
+    <h2>אפשרויות נוספות</h2>
+    <button class="btn-primary" onclick="openEmergencySystem()">🚨 מערכת דיווח חירום</button>
+  </div>
+
+  <!-- Neighborhood Families Screen -->
+  <div id="neighborhoodFamiliesScreen" class="screen">
+    <header>
+      <h1 id="neighborhoodTitle">👥 משפחות השכונה</h1>
+    </header>
+
+    <button class="btn-back" onclick="goHome()">← חזור</button>
+
+    <button class="btn-primary" onclick="openAddFamilyForm()">➕ הוסף משפחה חדשה</button>
+
+    <div id="familiesContainer"></div>
+  </div>
+
+  <!-- Edit Family Screen -->
+  <div id="editFamilyScreen" class="screen">
+    <header>
+      <h1 id="editTitle">✏️ עריכת משפחה</h1>
+    </header>
+
+    <button class="btn-back" onclick="backToFamilies()">← חזור</button>
+
+    <div class="card">
+      <div class="form-group">
+        <label>שם המשפחה:</label>
+        <input type="text" id="editFamilyName" placeholder="הקלד שם">
+      </div>
+
+      <div class="form-group">
+        <label>חברי משפחה (הפרד בפסיקים):</label>
+        <input type="text" id="editFamilyMembers" placeholder="חבר 1, חבר 2, חבר 3">
+      </div>
+
+      <div class="form-group">
+        <label>שכונה:</label>
+        <select id="editNeighborhood">
+          <option value="">-- בחר שכונה --</option>
+        </select>
+      </div>
+
+      <div id="editSuccess" class="success-message" style="display: none;">
+        ✓ המשפחה עודכנה בהצלחה!
+      </div>
+
+      <div id="editError" class="error-message" style="display: none;">
+        ❌ שגיאה בעדכון!
+      </div>
+
+      <div class="buttons-row">
+        <button class="btn-success" onclick="submitEditFamily()" style="flex: 1;">✓ שמור שינויים</button>
+        <button class="btn-danger" onclick="deleteFamily()" style="flex: 1;">🗑️ מחק משפחה</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add Family Screen -->
+  <div id="addFamilyScreen" class="screen">
+    <header>
+      <h1>➕ משפחה חדשה</h1>
+    </header>
+
+    <button class="btn-back" onclick="backToFamilies()">← חזור</button>
+
+    <div class="card">
+      <div class="form-group">
+        <label>שם המשפחה:</label>
+        <input type="text" id="newFamilyName" placeholder="הקלד שם">
+      </div>
+
+      <div class="form-group">
+        <label>חברי משפחה (הפרד בפסיקים):</label>
+        <input type="text" id="newFamilyMembers" placeholder="חבר 1, חבר 2, חבר 3">
+      </div>
+
+      <div class="form-group">
+        <label>שכונה:</label>
+        <select id="newNeighborhood">
+          <option value="">-- בחר שכונה --</option>
+        </select>
+      </div>
+
+      <div id="addSuccess" class="success-message" style="display: none;">
+        ✓ המשפחה נוספה בהצלחה!
+      </div>
+
+      <div id="addError" class="error-message" style="display: none;">
+        ❌ שגיאה בהוספת משפחה!
+      </div>
+
+      <button class="btn-success" onclick="submitAddFamily()" style="width: 100%; padding: 14px;">✓ הוסף משפחה</button>
+    </div>
+  </div>
+
+  <!-- Emergency System Redirect -->
+  <div id="emergencyRedirectScreen" class="screen">
+    <header>
+      <h1>🚨 מערכת דיווח חירום</h1>
+    </header>
+
+    <div class="card">
+      <p style="text-align: center; margin-bottom: 1rem;">
+        אתה עומד להיכנס למערכת דיווח חירום
+      </p>
+      <button class="btn-primary" onclick="redirectToEmergency()">כנס למערכת דיווח</button>
+      <button class="btn-secondary" onclick="goHome()">ביטול</button>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxKZbw_7VgfPNPbWjQ6lhrZGiBz5RIL8qx8FxDLl-GlIyQY0zs76T_nvrlah8gosjR--A/exec";
+const EMERGENCY_URL = "https://hamalnatur-creator.github.io/Yarok/";
+
+let state = {
+  neighborhoods: [],
+  families: [],
+  currentNeighborhood: null,
+  editingFamily: null
+};
+
+async function init() {
+  await loadNeighborhoodsFromSheets();
+  await loadFamiliesFromSheets();
+  
+  populateNeighborhoodSelects();
+  renderNeighborhoodsHome();
+}
+
+async function loadNeighborhoodsFromSheets() {
+  try {
+    const response = await fetch(APPS_SCRIPT_URL + "?action=getNeighborhoods");
+    if (response.ok) {
+      state.neighborhoods = await response.json();
+      console.log("✓ Neighborhoods loaded:", state.neighborhoods.length);
+    }
+  } catch (error) {
+    console.error("Error loading neighborhoods:", error);
+  }
+}
+
+async function loadFamiliesFromSheets() {
+  try {
+    const response = await fetch(APPS_SCRIPT_URL + "?action=getFamilies");
+    if (response.ok) {
+      state.families = await response.json();
+      console.log("✓ Families loaded:", state.families.length);
+    }
+  } catch (error) {
+    console.error("Error loading families:", error);
+  }
+}
+
+function populateNeighborhoodSelects() {
+  const selects = document.querySelectorAll('#editNeighborhood, #newNeighborhood');
+  selects.forEach(select => {
+    select.innerHTML = '<option value="">-- בחר שכונה --</option>';
+    state.neighborhoods.forEach(hood => {
+      const option = document.createElement('option');
+      option.value = hood.name;
+      option.textContent = hood.name + " - " + hood.leader;
+      select.appendChild(option);
+    });
+  });
+}
+
+function renderNeighborhoodsHome() {
+  const grid = document.getElementById('neighborhoodsGrid');
+  grid.innerHTML = '';
+  
+  state.neighborhoods.forEach(hood => {
+    const count = state.families.filter(f => f.neighborhood === hood.name).length;
+    const item = document.createElement('div');
+    item.className = 'card-item';
+    item.onclick = () => openNeighborhoodFamilies(hood);
+    item.innerHTML = `
+      <div class="card-item-title">${hood.name}</div>
+      <div class="card-item-subtitle">👤 ${hood.leader}</div>
+      <div class="card-item-subtitle" style="margin-top: 0.5rem;">משפחות: ${count}</div>
+    `;
+    grid.appendChild(item);
+  });
+}
+
+function openNeighborhoodFamilies(neighborhood) {
+  state.currentNeighborhood = neighborhood;
+  document.getElementById('neighborhoodTitle').textContent = '👥 משפחות ' + neighborhood.name;
+  
+  renderFamiliesList();
+  showScreen('neighborhoodFamiliesScreen');
+}
+
+function renderFamiliesList() {
+  const families = state.families.filter(f => f.neighborhood === state.currentNeighborhood.name);
+  const container = document.getElementById('familiesContainer');
+  
+  if (families.length === 0) {
+    container.innerHTML = '<div class="card" style="text-align: center; color: #999;">אין משפחות בשכונה זו</div>';
+    return;
+  }
+  
+  let html = '';
+  families.forEach(family => {
+    html += `
+      <div class="family-item">
+        <div class="family-info">
+          <div class="family-name">${family.name}</div>
+          <div class="family-members">${family.members.slice(0, 3).join(", ")}</div>
+        </div>
+        <div class="family-buttons">
+          <button class="btn-info" onclick="openEditFamily('${family.name}')" style="flex: 1;">✏️ עריכה</button>
+        </div>
+      </div>
+    `;
+  });
+  
+  container.innerHTML = html;
+}
+
+function openEditFamily(familyName) {
+  state.editingFamily = state.families.find(f => f.name === familyName);
+  if (!state.editingFamily) return;
+  
+  document.getElementById('editTitle').textContent = '✏️ עריכת ' + familyName;
+  document.getElementById('editFamilyName').value = state.editingFamily.name;
+  document.getElementById('editFamilyMembers').value = state.editingFamily.members.join(', ');
+  document.getElementById('editNeighborhood').value = state.editingFamily.neighborhood;
+  document.getElementById('editSuccess').style.display = 'none';
+  document.getElementById('editError').style.display = 'none';
+  
+  showScreen('editFamilyScreen');
+}
+
+async function submitEditFamily() {
+  const name = document.getElementById('editFamilyName').value.trim();
+  const members = document.getElementById('editFamilyMembers').value.split(',').map(m => m.trim()).filter(m => m);
+  const neighborhood = document.getElementById('editNeighborhood').value;
+  
+  if (!name || !neighborhood) {
+    document.getElementById('editError').style.display = 'block';
+    return;
+  }
+  
+  try {
+    const response = await fetch(APPS_SCRIPT_URL, {
+      method: 'POST',
+      body: JSON.stringify({
+        action: 'updateFamily',
+        oldName: state.editingFamily.name,
+        newName: name,
+        members: members,
+        neighborhood: neighborhood
+      })
+    });
+    
+    const result = await response.json();
+    if (result.success) {
+      // עדכן את state
+      const index = state.families.findIndex(f => f.name === state.editingFamily.name);
+      if (index !== -1) {
+        state.families[index] = {
+          name: name,
+          members: members,
+          neighborhood: neighborhood,
+          leader: state.neighborhoods.find(h => h.name === neighborhood)?.leader || ""
+        };
+      }
+      
+      document.getElementById('editSuccess').style.display = 'block';
+      setTimeout(() => {
+        backToFamilies();
+      }, 1500);
+    } else {
+      document.getElementById('editError').style.display = 'block';
+    }
+  } catch (error) {
+    console.error("Error:", error);
+    document.getElementById('editError').style.display = 'block';
+  }
+}
+
+async function deleteFamily() {
+  if (!confirm('האם בטוח שרוצה למחוק את ' + state.editingFamily.name + '?')) return;
+  
+  try {
+    const response = await fetch(APPS_SCRIPT_URL, {
+      method: 'POST',
+      body: JSON.stringify({
+        action: 'deleteFamily',
+        familyName: state.editingFamily.name
+      })
+    });
+    
+    const result = await response.json();
+    if (result.success) {
+      // הסר מ-state
+      state.families = state.families.filter(f => f.name !== state.editingFamily.name);
+      
+      document.getElementById('editSuccess').style.display = 'block';
+      document.getElementById('editSuccess').innerHTML = '✓ המשפחה נמחקה!';
+      setTimeout(() => {
+        backToFamilies();
+      }, 1500);
+    }
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
+
+function openAddFamilyForm() {
+  document.getElementById('newFamilyName').value = '';
+  document.getElementById('newFamilyMembers').value = '';
+  document.getElementById('newNeighborhood').value = state.currentNeighborhood.name;
+  document.getElementById('addSuccess').style.display = 'none';
+  document.getElementById('addError').style.display = 'none';
+  showScreen('addFamilyScreen');
+}
+
+async function submitAddFamily() {
+  const name = document.getElementById('newFamilyName').value.trim();
+  const members = document.getElementById('newFamilyMembers').value.split(',').map(m => m.trim()).filter(m => m);
+  const neighborhood = document.getElementById('newNeighborhood').value;
+  
+  if (!name || !neighborhood) {
+    document.getElementById('addError').style.display = 'block';
+    return;
+  }
+  
+  try {
+    const response = await fetch(APPS_SCRIPT_URL, {
+      method: 'POST',
+      body: JSON.stringify({
+        action: 'addFamily',
+        name: name,
+        members: members,
+        neighborhood: neighborhood
+      })
+    });
+    
+    const result = await response.json();
+    if (result.success) {
+      state.families.push({
+        name: name,
+        members: members,
+        neighborhood: neighborhood,
+        leader: state.neighborhoods.find(h => h.name === neighborhood)?.leader || ""
+      });
+      
+      document.getElementById('addSuccess').style.display = 'block';
+      setTimeout(() => {
+        backToFamilies();
+      }, 1500);
+    } else {
+      document.getElementById('addError').style.display = 'block';
+    }
+  } catch (error) {
+    console.error("Error:", error);
+    document.getElementById('addError').style.display = 'block';
+  }
+}
+
+function openEmergencySystem() {
+  showScreen('emergencyRedirectScreen');
+}
+
+function redirectToEmergency() {
+  window.location.href = EMERGENCY_URL;
+}
+
+function showScreen(screenId) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(screenId).classList.add('active');
+}
+
+function goHome() {
+  state.currentNeighborhood = null;
+  renderNeighborhoodsHome();
+  showScreen('homeScreen');
+}
+
+function backToFamilies() {
+  renderFamiliesList();
+  showScreen('neighborhoodFamiliesScreen');
+}
+
+// Initialize
+init();
+</script>
+
+</body>
+</html>
