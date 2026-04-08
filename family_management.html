@@ -349,8 +349,9 @@ label {
     <div id="neighborhoodsGrid" class="grid"></div>
 
     <h2>אפשרויות נוספות</h2>
-    <button class="btn-primary" id="adminDashboardBtn" onclick="openAdminDashboard()" style="display: none; background: linear-gradient(135deg, #f44336 0%, #da190b 100%);">📊 Dashboard מנהל</button>
-    <button class="btn-primary" onclick="openEmergencySystem()">🚨 מערכת דיווח חירום</button>
+    <button class="btn-primary" id="openEventBtn" onclick="openEventDialog()" style="background: linear-gradient(135deg, #f44336 0%, #da190b 100%);">🚨 פתח ארוע חירום</button>
+    <button class="btn-primary" id="closeEventBtn" onclick="closeEventDialog()" style="display: none; background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%);">🔒 סגור ארוע חירום</button>
+    <button class="btn-primary" onclick="openAdminDashboardDialog()">📊 Dashboard מנהל</button>
   </div>
 
   <!-- Neighborhood Management/Report Screen -->
@@ -405,7 +406,58 @@ label {
     </div>
   </div>
 
-  <!-- Add Family Screen -->
+  <!-- Emergency Event Dialog -->
+  <div id="eventDialogScreen" class="screen">
+    <header>
+      <h1>🚨 פתח ארוע חירום</h1>
+    </header>
+
+    <div class="card" style="max-width: 400px; margin: 2rem auto;">
+      <div class="form-group">
+        <label>הקלד קוד כדי לפתוח ארוע חירום:</label>
+        <input type="password" id="eventCode" placeholder="קוד">
+      </div>
+      <div id="eventCodeError" class="error-message" style="display: none;">❌ קוד שגוי!</div>
+      <div class="buttons-row">
+        <button class="btn-success" onclick="submitEventCode()" style="flex: 1;">✓ פתח</button>
+        <button class="btn-back" onclick="goHome()" style="flex: 1; margin: 0;">ביטול</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Close Event Dialog -->
+  <div id="closeEventDialogScreen" class="screen">
+    <header>
+      <h1>🔒 סגור ארוע חירום</h1>
+    </header>
+
+    <div class="card" style="max-width: 400px; margin: 2rem auto;">
+      <p style="text-align: center; margin-bottom: 1.5rem;">האם בטוח שרוצה לסגור את הארוע?</p>
+      <div class="buttons-row">
+        <button class="btn-danger" onclick="submitCloseEvent()" style="flex: 1;">🔒 סגור</button>
+        <button class="btn-back" onclick="goHome()" style="flex: 1; margin: 0;">ביטול</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Admin Dashboard Dialog -->
+  <div id="adminDialogScreen" class="screen">
+    <header>
+      <h1>📊 Dashboard מנהל</h1>
+    </header>
+
+    <div class="card" style="max-width: 400px; margin: 2rem auto;">
+      <div class="form-group">
+        <label>הקלד קוד כניסה:</label>
+        <input type="password" id="adminCode" placeholder="קוד">
+      </div>
+      <div id="adminCodeError" class="error-message" style="display: none;">❌ קוד שגוי!</div>
+      <div class="buttons-row">
+        <button class="btn-info" onclick="submitAdminCode()" style="flex: 1;">✓ כניסה</button>
+        <button class="btn-back" onclick="goHome()" style="flex: 1; margin: 0;">ביטול</button>
+      </div>
+    </div>
+  </div>
   <div id="addFamilyScreen" class="screen">
     <header>
       <h1>➕ משפחה חדשה</h1>
@@ -511,9 +563,11 @@ function renderNeighborhoodsHome() {
     emergencyBanner.innerHTML = '🚨 ארוע חירום פתוח - מצב דיווח ממשיך';
     headerHtml.parentNode.insertBefore(emergencyBanner, headerHtml.nextSibling);
     
-    document.getElementById('adminDashboardBtn').style.display = 'block';
+    document.getElementById('openEventBtn').style.display = 'none';
+    document.getElementById('closeEventBtn').style.display = 'block';
   } else {
-    document.getElementById('adminDashboardBtn').style.display = 'none';
+    document.getElementById('openEventBtn').style.display = 'block';
+    document.getElementById('closeEventBtn').style.display = 'none';
   }
   
   const grid = document.getElementById('neighborhoodsGrid');
@@ -757,7 +811,88 @@ function backToNeighborhood() {
   showScreen('neighborhoodScreen');
 }
 
-// Initialize
+function openEventDialog() {
+  document.getElementById('eventCode').value = '';
+  document.getElementById('eventCodeError').style.display = 'none';
+  showScreen('eventDialogScreen');
+}
+
+function closeEventDialog() {
+  showScreen('closeEventDialogScreen');
+}
+
+async function submitEventCode() {
+  const code = document.getElementById('eventCode').value;
+  
+  if (code !== '1234') {
+    document.getElementById('eventCodeError').style.display = 'block';
+    return;
+  }
+  
+  try {
+    const response = await fetch(APPS_SCRIPT_URL, {
+      method: 'POST',
+      body: JSON.stringify({
+        action: 'createEvent',
+        openedBy: 'מנהל'
+      })
+    });
+    
+    const result = await response.json();
+    if (result.success) {
+      await loadAllData();
+      renderNeighborhoodsHome();
+      alert('✓ ארוע חירום התחיל!');
+      goHome();
+    }
+  } catch (error) {
+    alert('❌ שגיאה: ' + error);
+  }
+}
+
+async function submitCloseEvent() {
+  if (!state.currentEvent) {
+    alert('אין ארוע פתוח');
+    return;
+  }
+  
+  try {
+    const response = await fetch(APPS_SCRIPT_URL, {
+      method: 'POST',
+      body: JSON.stringify({
+        action: 'closeEvent',
+        eventId: state.currentEvent.id
+      })
+    });
+    
+    const result = await response.json();
+    if (result.success) {
+      await loadAllData();
+      renderNeighborhoodsHome();
+      alert('✓ ארוע סגור!');
+      goHome();
+    }
+  } catch (error) {
+    alert('❌ שגיאה: ' + error);
+  }
+}
+
+function openAdminDashboardDialog() {
+  document.getElementById('adminCode').value = '';
+  document.getElementById('adminCodeError').style.display = 'none';
+  showScreen('adminDialogScreen');
+}
+
+function submitAdminCode() {
+  const code = document.getElementById('adminCode').value;
+  
+  if (code !== '12345') {
+    document.getElementById('adminCodeError').style.display = 'block';
+    return;
+  }
+  
+  openAdminDashboard();
+}
 init();
 </script>
 
