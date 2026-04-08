@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard מנהל - מערכת דיווח חירום</title>
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  color: #333;
+  direction: rtl;
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 2rem;
+  padding: 1.5rem 0;
+}
+
+h1 {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: #1f4e78;
+}
+
+h2 {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: #1f4e78;
+  text-align: right;
+}
+
+.event-status {
+  background: #fff3cd;
+  border: 2px solid #ffc107;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  font-weight: 600;
+  color: #856404;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.stat-card {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  text-align: center;
+  border-top: 4px solid #1f4e78;
+}
+
+.stat-card.sos {
+  border-top-color: #f44336;
+  background: #ffebee;
+}
+
+.stat-card.absent {
+  border-top-color: #ff9800;
+  background: #fff3e0;
+}
+
+.stat-card.ok {
+  border-top-color: #4caf50;
+  background: #f1f8f4;
+}
+
+.stat-number {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.stat-sos { color: #f44336; }
+.stat-absent { color: #ff9800; }
+.stat-ok { color: #4caf50; }
+
+.stat-label {
+  font-size: 14px;
+  color: #666;
+  font-weight: 600;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 24px;
+  background: #eee;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #4caf50, #45a049);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 12px;
+  font-weight: 600;
+  transition: width 0.3s;
+}
+
+.neighborhoods-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.neighborhood-card {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  border-left: 5px solid #1f4e78;
+}
+
+.neighborhood-title {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: #1f4e78;
+}
+
+.neighborhood-leader {
+  font-size: 12px;
+  color: #999;
+  margin-bottom: 1rem;
+}
+
+.neighborhood-stats {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #eee;
+}
+
+.neighborhood-stat {
+  text-align: center;
+}
+
+.neighborhood-stat-value {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.neighborhood-stat-label {
+  font-size: 11px;
+  color: #999;
+}
+
+.alert-section {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.alert-title {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: #f44336;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.alert-list {
+  list-style: none;
+}
+
+.alert-item {
+  background: #ffebee;
+  border-left: 4px solid #f44336;
+  padding: 1rem;
+  margin-bottom: 0.75rem;
+  border-radius: 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.alert-item.absent {
+  background: #fff3e0;
+  border-left-color: #ff9800;
+}
+
+.alert-family-name {
+  font-weight: 700;
+  color: #333;
+}
+
+.alert-family-details {
+  font-size: 12px;
+  color: #666;
+}
+
+.alert-neighborhood {
+  font-size: 12px;
+  background: rgba(0,0,0,0.1);
+  padding: 2px 8px;
+  border-radius: 4px;
+  margin-left: 1rem;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 2rem;
+  color: #999;
+}
+
+button {
+  padding: 12px 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.btn-back {
+  background: white;
+  border: 1px solid #ddd;
+  padding: 10px 16px;
+  font-size: 14px;
+  margin-bottom: 1.5rem;
+  width: auto;
+}
+
+.btn-back:hover {
+  border-color: #1f4e78;
+  color: #1f4e78;
+}
+
+.btn-refresh {
+  background: #2196f3;
+  color: white;
+  padding: 10px 16px;
+  font-size: 14px;
+  margin-bottom: 1.5rem;
+}
+
+.auto-refresh {
+  color: #999;
+  font-size: 12px;
+  margin-top: 0.5rem;
+}
+
+@media (max-width: 600px) {
+  h1 {
+    font-size: 24px;
+  }
+  
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .neighborhoods-grid {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <button class="btn-back" onclick="goBack()">← חזור</button>
+
+  <header>
+    <h1>📊 Dashboard מנהל</h1>
+    <p style="color: #666; margin-bottom: 1rem;">מצב עדכני של כל המושב בארוע חירום</p>
+  </header>
+
+  <div class="event-status">
+    🚨 ארוע חירום פתוח | עדכון אוטומטי כל 10 שניות
+  </div>
+
+  <!-- סטטיסטיקות כוללות -->
+  <div class="stats-grid">
+    <div class="stat-card ok">
+      <div class="stat-number" id="okCount">0</div>
+      <div class="stat-label">✓ משפחות בסדר</div>
+    </div>
+    <div class="stat-card sos">
+      <div class="stat-number" id="sosCount">0</div>
+      <div class="stat-label">🆘 צריכים עזרה</div>
+    </div>
+    <div class="stat-card absent">
+      <div class="stat-number" id="absentCount">0</div>
+      <div class="stat-label">✗ נעדרים</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number" id="totalReported">0</div>
+      <div class="stat-label">📊 דיווחו / סה"כ משפחות</div>
+    </div>
+  </div>
+
+  <!-- אחוז מילוי כללי -->
+  <div style="background: white; border-radius: 12px; padding: 1.5rem; margin-bottom: 2rem; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+    <h2>אחוז מילוי כללי</h2>
+    <div class="progress-bar">
+      <div class="progress-fill" id="overallProgress" style="width: 0%;">0%</div>
+    </div>
+  </div>
+
+  <!-- שכונות -->
+  <h2>סטטוס לפי שכונה</h2>
+  <div class="neighborhoods-grid" id="neighborhoodsContainer"></div>
+
+  <!-- SOS -->
+  <div class="alert-section">
+    <div class="alert-title">
+      🚨 משפחות בעזרה חירום
+    </div>
+    <ul class="alert-list" id="sosList">
+      <li class="empty-state">אין דיווחי SOS כרגע</li>
+    </ul>
+  </div>
+
+  <!-- נעדרים -->
+  <div class="alert-section">
+    <div class="alert-title">
+      ✗ משפחות נעדרות או לא בנתונים
+    </div>
+    <ul class="alert-list" id="absentList">
+      <li class="empty-state">אין משפחות נעדרות כרגע</li>
+    </ul>
+  </div>
+
+</div>
+
+<script>
+const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxKZbw_7VgfPNPbWjQ6lhrZGiBz5RIL8qx8FxDLl-GlIyQY0zs76T_nvrlah8gosjR--A/exec";
+
+let state = {
+  neighborhoods: [],
+  families: [],
+  reports: {},
+  memberReports: {}
+};
+
+async function init() {
+  await loadData();
+  updateDashboard();
+  
+  // עדכון אוטומטי כל 10 שניות
+  setInterval(async () => {
+    await loadData();
+    updateDashboard();
+  }, 10000);
+}
+
+async function loadData() {
+  try {
+    const response = await fetch(APPS_SCRIPT_URL + "?action=getNeighborhoods");
+    if (response.ok) state.neighborhoods = await response.json();
+  } catch (error) { console.error("Error:", error); }
+  
+  try {
+    const response = await fetch(APPS_SCRIPT_URL + "?action=getFamilies");
+    if (response.ok) state.families = await response.json();
+  } catch (error) { console.error("Error:", error); }
+  
+  try {
+    const response = await fetch(APPS_SCRIPT_URL + "?action=getAllReports");
+    if (response.ok) {
+      const data = await response.json();
+      state.reports = data.reports || {};
+      state.memberReports = data.memberReports || {};
+    }
+  } catch (error) { console.error("Error:", error); }
+}
+
+function updateDashboard() {
+  const families = state.families;
+  const reports = state.reports;
+  
+  // ספור דיווחים
+  let ok = 0, sos = 0, absent = 0;
+  
+  families.forEach(family => {
+    const report = reports[family.name];
+    if (!report) {
+      absent++;
+    } else if (report.type === "צריכים עזרה") {
+      sos++;
+    } else {
+      ok++;
+    }
+  });
+  
+  const total = families.length;
+  const reported = total - absent;
+  const percentage = total > 0 ? Math.round((reported / total) * 100) : 0;
+  
+  // עדכן סטטיסטיקות כוללות
+  document.getElementById('okCount').textContent = ok;
+  document.getElementById('sosCount').textContent = sos;
+  document.getElementById('absentCount').textContent = absent;
+  document.getElementById('totalReported').textContent = reported + " / " + total;
+  
+  // עדכן בר התקדמות
+  const progressBar = document.getElementById('overallProgress');
+  progressBar.style.width = percentage + "%";
+  progressBar.textContent = percentage + "%";
+  
+  // עדכן לפי שכונה
+  renderNeighborhoodsStats();
+  
+  // עדכן רשימות SOS ונעדרים
+  renderAlerts();
+}
+
+function renderNeighborhoodsStats() {
+  const container = document.getElementById('neighborhoodsContainer');
+  container.innerHTML = '';
+  
+  state.neighborhoods.forEach(hood => {
+    const familiesInHood = state.families.filter(f => f.neighborhood === hood.name);
+    const reports = state.reports;
+    
+    let ok = 0, sos = 0, absent = 0;
+    
+    familiesInHood.forEach(family => {
+      const report = reports[family.name];
+      if (!report) {
+        absent++;
+      } else if (report.type === "צריכים עזרה") {
+        sos++;
+      } else {
+        ok++;
+      }
+    });
+    
+    const total = familiesInHood.length;
+    const reported = total - absent;
+    const percentage = total > 0 ? Math.round((reported / total) * 100) : 0;
+    
+    const card = document.createElement('div');
+    card.className = 'neighborhood-card';
+    card.innerHTML = `
+      <div class="neighborhood-title">${hood.name}</div>
+      <div class="neighborhood-leader">${hood.leader}</div>
+      
+      <div class="neighborhood-stats">
+        <div class="neighborhood-stat">
+          <div class="neighborhood-stat-value" style="color: #4caf50;">${ok}</div>
+          <div class="neighborhood-stat-label">בסדר</div>
+        </div>
+        <div class="neighborhood-stat">
+          <div class="neighborhood-stat-value" style="color: #f44336;">${sos}</div>
+          <div class="neighborhood-stat-label">SOS</div>
+        </div>
+        <div class="neighborhood-stat">
+          <div class="neighborhood-stat-value" style="color: #ff9800;">${absent}</div>
+          <div class="neighborhood-stat-label">נעדרים</div>
+        </div>
+      </div>
+      
+      <div class="progress-bar">
+        <div class="progress-fill" style="width: ${percentage}%; background: linear-gradient(90deg, #4caf50, #45a049);">
+          ${percentage}%
+        </div>
+      </div>
+      <div style="font-size: 12px; color: #666; text-align: center;">
+        ${reported} / ${total} משפחות דיווחו
+      </div>
+    `;
+    
+    container.appendChild(card);
+  });
+}
+
+function renderAlerts() {
+  const reports = state.reports;
+  const families = state.families;
+  
+  // SOS
+  const sosItems = families.filter(f => reports[f.name]?.type === "צריכים עזרה");
+  const sosList = document.getElementById('sosList');
+  
+  if (sosItems.length === 0) {
+    sosList.innerHTML = '<li class="empty-state">✓ אין דיווחי SOS</li>';
+  } else {
+    sosList.innerHTML = sosItems.map(family => `
+      <li class="alert-item">
+        <div>
+          <div class="alert-family-name">${family.name}</div>
+          <div class="alert-family-details">${family.members.join(", ")}</div>
+        </div>
+        <div class="alert-neighborhood">${family.neighborhood}</div>
+      </li>
+    `).join('');
+  }
+  
+  // נעדרים
+  const absentItems = families.filter(f => !reports[f.name]);
+  const absentList = document.getElementById('absentList');
+  
+  if (absentItems.length === 0) {
+    absentList.innerHTML = '<li class="empty-state">✓ כל המשפחות דיווחו</li>';
+  } else {
+    absentList.innerHTML = absentItems.map(family => `
+      <li class="alert-item absent">
+        <div>
+          <div class="alert-family-name">${family.name}</div>
+          <div class="alert-family-details">${family.members.join(", ")}</div>
+        </div>
+        <div class="alert-neighborhood">${family.neighborhood}</div>
+      </li>
+    `).join('');
+  }
+}
+
+function goBack() {
+  window.location.href = "https://hamalnatur-creator.github.io/Yarok/family_management.html";
+}
+
+// Initialize
+init();
+</script>
+
+</body>
+</html>
