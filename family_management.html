@@ -347,6 +347,7 @@ label {
     <div id="neighborhoodsGrid" class="grid"></div>
 
     <h2>אפשרויות נוספות</h2>
+    <button class="btn-primary" id="adminDashboardBtn" onclick="openAdminDashboard()" style="display: none; background: linear-gradient(135deg, #f44336 0%, #da190b 100%);">📊 Dashboard מנהל</button>
     <button class="btn-primary" onclick="openEmergencySystem()">🚨 מערכת דיווח חירום</button>
   </div>
 
@@ -467,12 +468,14 @@ let state = {
   neighborhoods: [],
   families: [],
   currentNeighborhood: null,
-  editingFamily: null
+  editingFamily: null,
+  currentEvent: null
 };
 
 async function init() {
   await loadNeighborhoodsFromSheets();
   await loadFamiliesFromSheets();
+  await loadCurrentEvent();
   
   populateNeighborhoodSelects();
   renderNeighborhoodsHome();
@@ -502,6 +505,18 @@ async function loadFamiliesFromSheets() {
   }
 }
 
+async function loadCurrentEvent() {
+  try {
+    const response = await fetch(APPS_SCRIPT_URL + "?action=getCurrentEvent");
+    if (response.ok) {
+      state.currentEvent = await response.json();
+      console.log("✓ Current event:", state.currentEvent);
+    }
+  } catch (error) {
+    console.error("Error loading current event:", error);
+  }
+}
+
 function populateNeighborhoodSelects() {
   const selects = document.querySelectorAll('#editNeighborhood, #newNeighborhood');
   selects.forEach(select => {
@@ -516,6 +531,33 @@ function populateNeighborhoodSelects() {
 }
 
 function renderNeighborhoodsHome() {
+  // בנר חירום אם יש
+  const headerHtml = document.querySelector('header');
+  const existingBanner = document.getElementById('emergencyBannerDiv');
+  if (existingBanner) existingBanner.remove();
+  
+  if (state.currentEvent && state.currentEvent.status === "פתוח") {
+    const emergencyBanner = document.createElement('div');
+    emergencyBanner.id = 'emergencyBannerDiv';
+    emergencyBanner.style.cssText = `
+      background: #fff3cd;
+      border: 2px solid #ffc107;
+      padding: 1rem;
+      border-radius: 8px;
+      margin-bottom: 1.5rem;
+      text-align: center;
+      font-weight: 600;
+      color: #856404;
+    `;
+    emergencyBanner.innerHTML = '🚨 ארוע חירום פתוח - מצב דיווח ממשיך';
+    headerHtml.parentNode.insertBefore(emergencyBanner, headerHtml.nextSibling);
+    
+    // הצג כפתור dashboard
+    document.getElementById('adminDashboardBtn').style.display = 'block';
+  } else {
+    document.getElementById('adminDashboardBtn').style.display = 'none';
+  }
+  
   const grid = document.getElementById('neighborhoodsGrid');
   grid.innerHTML = '';
   
@@ -535,6 +577,16 @@ function renderNeighborhoodsHome() {
 
 function openNeighborhoodFamilies(neighborhood) {
   state.currentNeighborhood = neighborhood;
+  
+  // אם יש ארוע חירום פתוח, מעבר לדיווח
+  if (state.currentEvent && state.currentEvent.status === "פתוח") {
+    // כנס לדיווח משפחות עם neighborhood parameter
+    const emergencyUrl = "https://hamalnatur-creator.github.io/Yarok/?neighborhood=" + encodeURIComponent(neighborhood.name);
+    window.location.href = emergencyUrl;
+    return;
+  }
+  
+  // אחרת, עמוד ניהול משפחות
   document.getElementById('neighborhoodTitle').textContent = '👥 משפחות ' + neighborhood.name;
   
   renderFamiliesList();
@@ -712,6 +764,10 @@ async function submitAddFamily() {
 
 function openEmergencySystem() {
   showScreen('emergencyRedirectScreen');
+}
+
+function openAdminDashboard() {
+  window.location.href = "https://hamalnatur-creator.github.io/Yarok/admin_dashboard.html";
 }
 
 function redirectToEmergency() {
